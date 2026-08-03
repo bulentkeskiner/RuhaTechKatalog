@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>RuhaTech Ürün Kataloğu</title>
+<style>
+  :root {
+    --bg: #f5f6f8;
+    --card: #ffffff;
+    --text: #1a1a1a;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --accent: #2563eb;
+    --head-bg: #111827;
+    --head-text: #ffffff;
+    --row-hover: #f0f4ff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1115;
+      --card: #171a21;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #2a2e37;
+      --accent: #60a5fa;
+      --head-bg: #1f2430;
+      --head-text: #f3f4f6;
+      --row-hover: #1c2333;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 24px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+  h1 {
+    font-size: 20px;
+    margin: 0 0 4px;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+  .toolbar {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  #search {
+    flex: 1;
+    min-width: 220px;
+    padding: 9px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--card);
+    color: var(--text);
+    font-size: 14px;
+  }
+  #search:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+  #count { color: var(--muted); font-size: 13px; white-space: nowrap; }
+  .table-wrap {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: auto;
+    max-width: 100%;
+  }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; }
+  thead th {
+    position: sticky;
+    top: 0;
+    background: var(--head-bg);
+    color: var(--head-text);
+    text-align: left;
+    padding: 10px 12px;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+  }
+  thead th:hover { opacity: 0.85; }
+  tbody td {
+    padding: 9px 12px;
+    border-top: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tbody tr:hover { background: var(--row-hover); }
+  td.desc { color: var(--muted); max-width: 320px; }
+  td.price { font-weight: 600; white-space: nowrap; }
+  th.rownum, td.rownum { color: var(--muted); text-align: right; white-space: nowrap; }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .badge.in { background: #dcfce7; color: #166534; }
+  .badge.out { background: #fee2e2; color: #991b1b; }
+  @media (prefers-color-scheme: dark) {
+    .badge.in { background: #14532d; color: #bbf7d0; }
+    .badge.out { background: #7f1d1d; color: #fecaca; }
+  }
+  .empty, .error {
+    padding: 32px;
+    text-align: center;
+    color: var(--muted);
+  }
+  .error { color: #dc2626; }
+  td.thumb { padding: 6px 12px; }
+  td.thumb img {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: zoom-in;
+    display: block;
+  }
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    cursor: zoom-out;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  }
+</style>
+</head>
+<body>
+
+<h1>RuhaTech Ürün Kataloğu</h1>
+<div class="subtitle">ruhatech-catalog.csv dosyasından canlı okunur — dosya güncellendiğinde tablo otomatik yenilenir.</div>
+
+<div class="toolbar">
+  <input id="search" type="text" placeholder="Ürün, marka, kod ara...">
+  <span id="count"></span>
+</div>
+
+<div class="table-wrap">
+  <table id="tbl">
+    <thead><tr id="thead-row"></tr></thead>
+    <tbody id="tbody"></tbody>
+  </table>
+</div>
+
+<div class="lightbox" id="lightbox">
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+const CSV_FILE = 'ruhatech-catalog.csv';
+const POLL_MS = 3000;
+
+// Bilinen CSV alanları için Türkçe başlık; listede olmayanlar CSV'deki adıyla gösterilir.
+const LABELS = {
+  id: 'Kod', title: 'Ürün Adı', description: 'Açıklama', availability: 'Stok', condition: 'Durum',
+  price: 'Fiyat', link: 'Link', image_link: 'Görsel', brand: 'Marka',
+  google_product_category: 'Kategori (Google)', fb_product_category: 'Kategori (FB)',
+  quantity_to_sell_on_facebook: 'Adet', sale_price: 'İndirimli Fiyat',
+  sale_price_effective_date: 'İndirim Tarihi', item_group_id: 'Grup ID',
+  gender: 'Cinsiyet', color: 'Renk', size: 'Beden', age_group: 'Yaş Grubu',
+  material: 'Materyal', pattern: 'Desen', shipping: 'Kargo', shipping_weight: 'Kargo Ağırlığı',
+  offer_disclaimer: 'Açıklama Notu', offer_disclaimer_url: 'Açıklama URL',
+  'video[0].url': 'Video URL', 'video[0].tag[0]': 'Video Etiket', gtin: 'GTIN',
+  'product_tags[0]': 'Etiket 1', 'product_tags[1]': 'Etiket 2', 'style[0]': 'Stil',
+};
+
+// CSV'deki tüm başlıklardan otomatik türetilir (loadCatalog içinde doldurulur).
+let COLUMNS = [];
+let rows = [];
+let lastRawText = null;
+let sortKey = null;
+let sortDir = 1;
+
+function parseCSV(text) {
+  const lines = [];
+  let field = '', row = [], inQuotes = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i], next = text[i + 1];
+    if (inQuotes) {
+      if (c === '"' && next === '"') { field += '"'; i++; }
+      else if (c === '"') { inQuotes = false; }
+      else { field += c; }
+    } else {
+      if (c === '"') inQuotes = true;
+      else if (c === ',') { row.push(field); field = ''; }
+      else if (c === '\r') { /* ignore */ }
+      else if (c === '\n') { row.push(field); lines.push(row); row = []; field = ''; }
+      else field += c;
+    }
+  }
+  if (field.length || row.length) { row.push(field); lines.push(row); }
+  return lines.filter(r => r.length > 1 || (r[0] && r[0].trim() !== ''));
+}
+
+function loadCatalog() {
+  fetch(CSV_FILE + '?t=' + Date.now())
+    .then(res => {
+      if (!res.ok) throw new Error('Dosya okunamadı (HTTP ' + res.status + ')');
+      return res.text();
+    })
+    .then(text => {
+      // İçerik son yüklemeden beri değişmediyse yeniden çizmeye gerek yok.
+      if (text === lastRawText) return;
+      lastRawText = text;
+
+      const lines = parseCSV(text);
+      if (!lines.length) throw new Error('CSV boş görünüyor');
+
+      // İlk satır Facebook'un "# Zorunlu | ..." açıklama satırıdır, atla.
+      let headerIdx = 0;
+      if (lines[0][0] && lines[0][0].trim().startsWith('#')) headerIdx = 1;
+
+      const header = lines[headerIdx].map(h => h.trim());
+      // CSV'deki tüm başlıklar gösterilir (o kolon tüm satırlarda boş olsa bile).
+      COLUMNS = header.map(h => [h, LABELS[h] || h]);
+
+      rows = lines.slice(headerIdx + 1).map(r => {
+        const obj = {};
+        header.forEach((h, i) => obj[h] = (r[i] || '').trim());
+        return obj;
+      }).filter(r => r.id);
+
+      render();
+    })
+    .catch(err => {
+      document.getElementById('thead-row').innerHTML = '';
+      document.getElementById('tbody').innerHTML =
+        '<tr><td class="error">Hata: ' + escapeHtml(err.message) +
+        '<br><small>Bu sayfayı bir yerel sunucu üzerinden açtığınızdan emin olun (aşağıdaki notu okuyun).</small></td></tr>';
+    });
+}
+
+function escapeHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, m => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[m]));
+}
+
+function renderHead() {
+  const tr = document.getElementById('thead-row');
+  tr.innerHTML = '<th class="rownum">#</th>' + COLUMNS.map(([key, label]) =>
+    '<th data-key="' + escapeHtml(key) + '">' + escapeHtml(label) + (sortKey === key ? (sortDir === 1 ? ' ▲' : ' ▼') : '') + '</th>'
+  ).join('');
+  tr.querySelectorAll('th[data-key]').forEach(th => {
+    th.addEventListener('click', () => {
+      const key = th.dataset.key;
+      if (sortKey === key) sortDir *= -1; else { sortKey = key; sortDir = 1; }
+      render();
+    });
+  });
+}
+
+function render() {
+  renderHead();
+
+  const q = document.getElementById('search').value.trim().toLowerCase();
+  let filtered = rows.filter(r =>
+    !q || Object.values(r).some(v => v.toLowerCase().includes(q))
+  );
+
+  if (sortKey) {
+    filtered = filtered.slice().sort((a, b) => {
+      let va = a[sortKey] || '', vb = b[sortKey] || '';
+      const na = parseFloat(va), nb = parseFloat(vb);
+      if (!isNaN(na) && !isNaN(nb)) return (na - nb) * sortDir;
+      return va.localeCompare(vb, 'tr') * sortDir;
+    });
+  }
+
+  document.getElementById('count').textContent = filtered.length + ' / ' + rows.length + ' ürün';
+
+  const tbody = document.getElementById('tbody');
+  if (!filtered.length) {
+    tbody.innerHTML = '<tr><td class="empty" colspan="' + (COLUMNS.length + 1) + '">Ürün bulunamadı</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = filtered.map((r, idx) => {
+    const cells = COLUMNS.map(([key]) => {
+      if (key === 'availability') {
+        const inStock = r[key] === 'in stock';
+        return '<td><span class="badge ' + (inStock ? 'in' : 'out') + '">' +
+          (inStock ? 'Stokta' : 'Stok Dışı') + '</span></td>';
+      }
+      if (key === 'price') return '<td class="price">' + escapeHtml(r[key]) + '</td>';
+      if (key === 'description') return '<td class="desc">' + escapeHtml(r[key]) + '</td>';
+      if (key === 'image_link') {
+        if (!r[key]) return '<td class="thumb"></td>';
+        const src = escapeHtml(r[key]);
+        return '<td class="thumb"><img src="' + src + '" alt="" loading="lazy" onclick="openLightbox(\'' + src + '\')"></td>';
+      }
+      return '<td>' + escapeHtml(r[key]) + '</td>';
+    });
+    return '<tr><td class="rownum">' + (idx + 1) + '</td>' + cells.join('') + '</tr>';
+  }).join('');
+}
+
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+}
+document.getElementById('lightbox').addEventListener('click', () => {
+  document.getElementById('lightbox').classList.remove('open');
+});
+
+document.getElementById('search').addEventListener('input', render);
+
+loadCatalog();
+setInterval(loadCatalog, POLL_MS);
+</script>
+
+</body>
+</html>

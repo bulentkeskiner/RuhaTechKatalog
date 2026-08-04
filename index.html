@@ -91,6 +91,12 @@
   }
   tbody tr:hover { background: var(--row-hover); }
   td.desc { color: var(--muted); max-width: 320px; }
+  td.desc span, td.cat span {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
   td.price { font-weight: 600; white-space: nowrap; }
   td.link { max-width: 160px; }
   td.link a {
@@ -100,6 +106,7 @@
     white-space: nowrap;
     color: var(--accent);
   }
+  td.cat { max-width: 220px; }
   th.rownum, td.rownum { color: var(--muted); text-align: right; white-space: nowrap; }
   .badge {
     display: inline-block;
@@ -187,7 +194,7 @@ const LABELS = {
   material: 'Materyal', pattern: 'Desen', shipping: 'Kargo', shipping_weight: 'Kargo Ağırlığı',
   offer_disclaimer: 'Açıklama Notu', offer_disclaimer_url: 'Açıklama URL',
   'video[0].url': 'Video URL', 'video[0].tag[0]': 'Video Etiket', gtin: 'GTIN',
-  'product_tags[0]': 'Etiket 1', 'product_tags[1]': 'Etiket 2', 'style[0]': 'Stil',
+  'product_tags[0]': 'Etiket 1', 'product_tags[1]': 'Etiket 2', 'product_tags[2]': 'Etiket 3', 'style[0]': 'Stil',
 };
 
 // CSV'deki tüm başlıklardan otomatik türetilir (loadCatalog içinde doldurulur).
@@ -309,7 +316,14 @@ function render() {
           (inStock ? 'Stokta' : 'Stok Dışı') + '</span></td>';
       }
       if (key === 'price') return '<td class="price">' + escapeHtml(r[key]) + '</td>';
-      if (key === 'description') return '<td class="desc">' + escapeHtml(r[key]) + '</td>';
+      if (key === 'description') {
+        const v = escapeHtml(r[key]);
+        return '<td class="desc"><span title="' + v + '">' + v + '</span></td>';
+      }
+      if (key === 'google_product_category') {
+        const v = escapeHtml(r[key]);
+        return '<td class="cat"><span title="' + v + '">' + v + '</span></td>';
+      }
       if (key === 'image_link') {
         if (!r[key]) return '<td class="thumb"></td>';
         const src = escapeHtml(r[key]);

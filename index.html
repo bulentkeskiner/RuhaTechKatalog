@@ -92,6 +92,14 @@
   tbody tr:hover { background: var(--row-hover); }
   td.desc { color: var(--muted); max-width: 320px; }
   td.price { font-weight: 600; white-space: nowrap; }
+  td.link { max-width: 160px; }
+  td.link a {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--accent);
+  }
   th.rownum, td.rownum { color: var(--muted); text-align: right; white-space: nowrap; }
   .badge {
     display: inline-block;
@@ -306,6 +314,11 @@ function render() {
         if (!r[key]) return '<td class="thumb"></td>';
         const src = escapeHtml(r[key]);
         return '<td class="thumb"><img src="' + src + '" alt="" loading="lazy" onclick="openLightbox(\'' + src + '\')"></td>';
+      }
+      if (key === 'link') {
+        if (!r[key]) return '<td class="link"></td>';
+        const href = escapeHtml(r[key]);
+        return '<td class="link"><a href="' + href + '" target="_blank" rel="noopener" title="' + href + '">' + href + '</a></td>';
       }
       return '<td>' + escapeHtml(r[key]) + '</td>';
     });

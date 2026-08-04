@@ -64,6 +64,73 @@
   }
   #search:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
   #count { color: var(--muted); font-size: 13px; white-space: nowrap; }
+  .filters {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    padding: 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .filters .field {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .filters label {
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+  .filters select, .filters input[type="number"] {
+    padding: 7px 9px;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 13px;
+    min-width: 130px;
+  }
+  .filters select:focus, .filters input:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+  .price-range { display: flex; align-items: center; gap: 4px; }
+  .price-range input { min-width: 70px; width: 70px; }
+  .price-range span { color: var(--muted); font-size: 12px; }
+  .filters .checkbox-field {
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    padding-top: 14px;
+  }
+  .filters .checkbox-field label {
+    text-transform: none;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    cursor: pointer;
+  }
+  .filters input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; accent-color: var(--accent); }
+  #resetFilters {
+    align-self: flex-end;
+    padding: 7px 14px;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 13px;
+    cursor: pointer;
+  }
+  #resetFilters:hover { background: var(--row-hover); }
+  #activeCount {
+    align-self: flex-end;
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 600;
+  }
   .table-wrap {
     background: var(--card);
     border: 1px solid var(--border);
@@ -168,6 +235,51 @@
   <span id="count"></span>
 </div>
 
+<div class="filters">
+  <div class="field">
+    <label for="fCategory">Kategori</label>
+    <select id="fCategory"><option value="">Tümü</option></select>
+  </div>
+  <div class="field">
+    <label for="fBrand">Marka</label>
+    <select id="fBrand"><option value="">Tümü</option></select>
+  </div>
+  <div class="field">
+    <label for="fGroup">Grup (Etiket 1)</label>
+    <select id="fGroup"><option value="">Tümü</option></select>
+  </div>
+  <div class="field">
+    <label for="fStock">Stok</label>
+    <select id="fStock">
+      <option value="">Tümü</option>
+      <option value="in">Stokta</option>
+      <option value="out">Stok Dışı</option>
+    </select>
+  </div>
+  <div class="field">
+    <label for="fImage">Görsel</label>
+    <select id="fImage">
+      <option value="">Tümü</option>
+      <option value="yes">Görseli olanlar</option>
+      <option value="no">Görseli olmayanlar</option>
+    </select>
+  </div>
+  <div class="field">
+    <label>Fiyat Aralığı (USD)</label>
+    <div class="price-range">
+      <input id="fPriceMin" type="number" min="0" step="0.01" placeholder="Min">
+      <span>—</span>
+      <input id="fPriceMax" type="number" min="0" step="0.01" placeholder="Max">
+    </div>
+  </div>
+  <div class="field checkbox-field">
+    <input id="fOnlyNew" type="checkbox">
+    <label for="fOnlyNew">Sadece Yeni (Etiket 3)</label>
+  </div>
+  <button id="resetFilters" type="button">Filtreleri Temizle</button>
+  <span id="activeCount"></span>
+</div>
+
 <div class="table-wrap">
   <table id="tbl">
     <thead><tr id="thead-row"></tr></thead>
@@ -253,6 +365,7 @@ function loadCatalog() {
         return obj;
       }).filter(r => r.id);
 
+      populateFilterOptions();
       render();
     })
     .catch(err => {
@@ -283,13 +396,61 @@ function renderHead() {
   });
 }
 
+function fillSelect(select, values, keepValue) {
+  const current = keepValue !== undefined ? keepValue : select.value;
+  select.innerHTML = '<option value="">Tümü</option>' +
+    values.map(v => '<option value="' + escapeHtml(v) + '">' + escapeHtml(v) + '</option>').join('');
+  if (current && values.includes(current)) select.value = current;
+}
+
+function populateFilterOptions() {
+  const uniq = key => [...new Set(rows.map(r => r[key]).filter(v => v))].sort((a, b) => a.localeCompare(b, 'tr'));
+  fillSelect(document.getElementById('fCategory'), uniq('google_product_category'));
+  fillSelect(document.getElementById('fBrand'), uniq('brand'));
+  fillSelect(document.getElementById('fGroup'), uniq('product_tags[0]'));
+}
+
+function parsePrice(v) {
+  const n = parseFloat(String(v).replace(',', '.'));
+  return isNaN(n) ? null : n;
+}
+
 function render() {
   renderHead();
 
   const q = document.getElementById('search').value.trim().toLowerCase();
-  let filtered = rows.filter(r =>
-    !q || Object.values(r).some(v => v.toLowerCase().includes(q))
-  );
+  const fCategory = document.getElementById('fCategory').value;
+  const fBrand = document.getElementById('fBrand').value;
+  const fGroup = document.getElementById('fGroup').value;
+  const fStock = document.getElementById('fStock').value;
+  const fImage = document.getElementById('fImage').value;
+  const fPriceMin = document.getElementById('fPriceMin').value;
+  const fPriceMax = document.getElementById('fPriceMax').value;
+  const fOnlyNew = document.getElementById('fOnlyNew').checked;
+
+  let activeFilters = 0;
+  [fCategory, fBrand, fGroup, fStock, fImage, fPriceMin, fPriceMax].forEach(v => { if (v) activeFilters++; });
+  if (fOnlyNew) activeFilters++;
+  document.getElementById('activeCount').textContent = activeFilters ? activeFilters + ' filtre aktif' : '';
+
+  let filtered = rows.filter(r => {
+    if (q && !Object.values(r).some(v => v.toLowerCase().includes(q))) return false;
+    if (fCategory && r['google_product_category'] !== fCategory) return false;
+    if (fBrand && r['brand'] !== fBrand) return false;
+    if (fGroup && r['product_tags[0]'] !== fGroup) return false;
+    if (fStock === 'in' && r['availability'] !== 'in stock') return false;
+    if (fStock === 'out' && r['availability'] === 'in stock') return false;
+    if (fImage === 'yes' && !r['image_link']) return false;
+    if (fImage === 'no' && r['image_link']) return false;
+    if (fOnlyNew && r['product_tags[2]'] !== 'Yeni') return false;
+    if (fPriceMin || fPriceMax) {
+      const p = parsePrice(r['price']);
+      if (p === null) return false;
+      if (fPriceMin && p < parseFloat(fPriceMin)) return false;
+      if (fPriceMax && p > parseFloat(fPriceMax)) return false;
+    }
+    return true;
+  });
 
   if (sortKey) {
     filtered = filtered.slice().sort((a, b) => {
@@ -349,6 +510,21 @@ document.getElementById('lightbox').addEventListener('click', () => {
 });
 
 document.getElementById('search').addEventListener('input', render);
+['fCategory', 'fBrand', 'fGroup', 'fStock', 'fImage'].forEach(id => {
+  document.getElementById(id).addEventListener('change', render);
+});
+['fPriceMin', 'fPriceMax'].forEach(id => {
+  document.getElementById(id).addEventListener('input', render);
+});
+document.getElementById('fOnlyNew').addEventListener('change', render);
+document.getElementById('resetFilters').addEventListener('click', () => {
+  document.getElementById('search').value = '';
+  ['fCategory', 'fBrand', 'fGroup', 'fStock', 'fImage'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('fPriceMin').value = '';
+  document.getElementById('fPriceMax').value = '';
+  document.getElementById('fOnlyNew').checked = false;
+  render();
+});
 
 loadCatalog();
 setInterval(loadCatalog, POLL_MS);

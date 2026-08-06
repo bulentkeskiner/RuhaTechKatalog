@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>RuhaTech Yönetim Paneli</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="app-shell">
+  <div class="sidebar-scrim" id="scrim"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="mark">RT</div>
+      <span>RuhaTech Yönetim</span>
+    </div>
+    <nav class="nav">
+      <button class="nav-item active" data-view="dashboardView" data-route="#/dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="5" rx="1.5"/><rect x="13" y="12" width="8" height="9" rx="1.5"/><rect x="3" y="14" width="8" height="7" rx="1.5"/></svg>
+        Dashboard
+      </button>
+      <button class="nav-item" data-view="productsView" data-route="#/products">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 7 12 3 4 7v10l8 4 8-4V7Z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg>
+        Ürünler
+      </button>
+      <button class="nav-item" data-view="tagsView" data-route="#/tags">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.6 12.3 12.7 20.2a2 2 0 0 1-2.8 0l-6.1-6.1a2 2 0 0 1 0-2.8L11.7 3.3A2 2 0 0 1 13.1 2.7L20 3l.3 6.9a2 2 0 0 1-.6 1.4Z"/><circle cx="15.5" cy="7.5" r="1.2"/></svg>
+        Etiketler
+      </button>
+      <button class="nav-item" data-view="settingsView" data-route="#/settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>
+        Ayarlar
+      </button>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="user-chip"><span class="dot"></span><span id="userEmail">—</span></div>
+      <button class="btn btn-block btn-sm" id="logoutBtn" style="margin-top:8px;">Çıkış Yap</button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <button class="hamburger" id="hamburger" aria-label="Menü">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <div class="brand" style="padding:0;"><div class="mark" style="width:26px;height:26px;font-size:11px;">RT</div></div>
+      <span style="width:22px;"></span>
+    </div>
+
+    <div class="content">
+
+      <!-- ================= DASHBOARD ================= -->
+      <section class="view active" id="dashboardView">
+        <div class="page-head">
+          <div>
+            <h1>Dashboard</h1>
+            <p>Katalog durumuna genel bakış.</p>
+          </div>
+          <button class="btn" id="refreshStatsBtn">Yenile</button>
+        </div>
+
+        <div class="stat-grid" id="statGrid"></div>
+
+        <div class="two-col">
+          <div class="panel">
+            <div class="panel-head"><h3>Kategoriye Göre Dağılım (Etiket 1)</h3></div>
+            <div class="panel-body" id="groupBreakdown"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><h3>Markaya Göre Dağılım</h3></div>
+            <div class="panel-body" id="brandBreakdown"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= ÜRÜNLER ================= -->
+      <section class="view" id="productsView">
+        <div class="page-head">
+          <div>
+            <h1>Ürünler</h1>
+            <p>Katalogdaki tüm ürünleri yönetin.</p>
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <input type="file" id="csvImportInput" accept=".csv" hidden>
+            <button class="btn" id="csvImportBtn">CSV İçe Aktar</button>
+            <button class="btn" id="csvExportBtn">CSV İndir</button>
+            <button class="btn" id="publishNowBtn">Şimdi Yayınla</button>
+            <button class="btn btn-primary" id="addProductBtn">+ Yeni Ürün</button>
+          </div>
+        </div>
+
+        <div class="filters">
+          <div class="field grow">
+            <label for="fSearch">Ara</label>
+            <input id="fSearch" type="text" placeholder="Ürün adı, kod, marka...">
+          </div>
+          <div class="field"><label for="fBrand">Marka</label><select id="fBrand"><option value="">Tümü</option></select></div>
+          <div class="field"><label for="fStock">Stok</label>
+            <select id="fStock"><option value="">Tümü</option><option value="in">Stokta</option><option value="out">Stok Dışı</option></select>
+          </div>
+          <div class="field"><label for="fImage">Görsel</label>
+            <select id="fImage"><option value="">Tümü</option><option value="yes">Var</option><option value="no">Yok</option></select>
+          </div>
+          <div class="field">
+            <label>Fiyat (USD)</label>
+            <div class="price-range">
+              <input id="fPriceMin" type="number" min="0" step="0.01" placeholder="Min">
+              <span>—</span>
+              <input id="fPriceMax" type="number" min="0" step="0.01" placeholder="Max">
+            </div>
+          </div>
+          <button class="btn btn-sm" id="resetFiltersBtn">Temizle</button>
+        </div>
+
+        <div class="group-scroller" id="groupScroller"></div>
+
+        <div class="filter-meta">
+          <span class="count-chip" id="resultCount">—</span>
+        </div>
+
+        <div class="panel">
+          <div class="table-wrap">
+            <table id="productsTable">
+              <thead>
+                <tr>
+                  <th data-sort="_thumb" style="cursor:default;"></th>
+                  <th data-sort="title">Ürün</th>
+                  <th data-sort="brand">Marka</th>
+                  <th data-sort="price">Fiyat</th>
+                  <th data-sort="availability">Stok</th>
+                  <th data-sort="product_tags_0">Grup</th>
+                  <th style="cursor:default;"></th>
+                </tr>
+              </thead>
+              <tbody id="productsTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= ETİKETLER ================= -->
+      <section class="view" id="tagsView">
+        <div class="page-head">
+          <div>
+            <h1>Etiketler</h1>
+            <p>Ürün formundaki Etiket 1/2/3 seçim listeleri buradan yönetilir.</p>
+          </div>
+        </div>
+
+        <form id="addTagForm" class="filters" style="align-items: flex-end;">
+          <div class="field grow">
+            <label for="newTagInput">Yeni etiket</label>
+            <input id="newTagInput" type="text" placeholder="örn. Şarj Grubu" required>
+          </div>
+          <button type="submit" class="btn btn-primary">+ Ekle</button>
+        </form>
+
+        <div class="panel">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Etiket</th><th style="cursor:default;"></th></tr></thead>
+              <tbody id="tagsTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= ÜRÜN EKLE / DÜZENLE (tam sayfa) ================= -->
+      <section class="view" id="productFormView">
+        <div class="page-head">
+          <div class="page-head-title">
+            <button type="button" class="back-btn" id="backToProductsBtn" aria-label="Ürünlere dön">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <div>
+              <h1 id="productFormTitle">Yeni Ürün</h1>
+              <p>Facebook kataloğu için gereken tüm bilgileri doldurun.</p>
+            </div>
+          </div>
+        </div>
+
+        <form id="productForm">
+          <div class="panel">
+            <div class="panel-body" id="productFormBody"></div>
+          </div>
+          <div class="form-actions-bar">
+            <button type="button" class="btn" id="cancelProductBtn">Vazgeç</button>
+            <button type="submit" class="btn btn-primary" id="saveProductBtn">Kaydet</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- ================= AYARLAR ================= -->
+      <section class="view" id="settingsView">
+        <div class="page-head">
+          <div>
+            <h1>Ayarlar</h1>
+            <p>Katalog CSV'sinin GitHub'a otomatik yayınlanması için bağlantı bilgileri.</p>
+          </div>
+        </div>
+
+        <form id="githubForm">
+          <div class="panel">
+            <div class="panel-body">
+              <p style="margin:0 0 16px; font-size:13px; color:var(--muted);">
+                Ürün ekleme/düzenleme/silme sonrasında katalog CSV'si otomatik olarak bu GitHub deposuna yazılır.
+                Facebook Commerce Manager'da veri kaynağı olarak aşağıdaki herkese açık linki kullanın.
+              </p>
+              <div class="form-grid">
+                <div class="field"><label for="gh_owner">GitHub Kullanıcı/Org</label><input id="gh_owner" required placeholder="bulentkeskiner"></div>
+                <div class="field"><label for="gh_repo">Repo Adı</label><input id="gh_repo" required placeholder="RuhaTechKatalog"></div>
+                <div class="field"><label for="gh_branch">Branch</label><input id="gh_branch" required placeholder="main"></div>
+                <div class="field"><label for="gh_path">Dosya Yolu</label><input id="gh_path" required placeholder="ruhatech-catalog.csv"></div>
+                <div class="field span-2">
+                  <label for="gh_token">Personal Access Token</label>
+                  <input id="gh_token" type="password" required placeholder="github_pat_...">
+                  <div class="help-text">Fine-grained token oluşturun, yalnızca bu repoyu ve sadece "Contents: Read and write" iznini seçin. Token yalnızca sizin panelinizde (giriş korumalı) saklanır.</div>
+                </div>
+              </div>
+              <div class="field span-2" style="margin-top:16px;">
+                <label>Herkese Açık CSV Linki (Facebook'a bunu verin)</label>
+                <div style="display:flex; gap:8px;">
+                  <input id="gh_publicUrl" readonly class="mono" style="flex:1;">
+                  <button type="button" class="btn btn-sm" id="copyPublicUrlBtn">Kopyala</button>
+                </div>
+                <div class="help-text" id="gh_lastPublish"></div>
+              </div>
+              <div class="filter-meta" id="publishStatusRow" style="display:none; margin-top:12px;">
+                <span class="count-chip" id="publishStatus"></span>
+              </div>
+            </div>
+          </div>
+          <div class="form-actions-bar">
+            <button type="button" class="btn" id="testPublishBtn">Kaydet ve Test Yayınla</button>
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+          </div>
+        </form>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<!-- ================= SİLME ONAY MODAL ================= -->
+<div class="modal-overlay confirm-modal" id="confirmModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h2>Ürünü Sil</h2>
+      <button class="modal-close" id="closeConfirmModal" aria-label="Kapat">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p style="margin:0 0 6px;">"<strong id="confirmProductName"></strong>" ürünü kalıcı olarak silinecek.</p>
+      <p style="margin:0; color:var(--muted); font-size:13px;">Bu işlem geri alınamaz.</p>
+    </div>
+    <div class="modal-foot">
+      <button type="button" class="btn" id="cancelDeleteBtn">Vazgeç</button>
+      <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Sil</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-stack" id="toastStack"></div>
+
+<script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+rules_version = '2';
+
+// Güvenlik modeli: Bu panel tek-kullanıcılı (işletme sahibi) bir iç araçtır.
+// Herkese açık kayıt (sign-up) YOKTUR — admin hesabı yalnızca Firebase Console'dan
+// elle oluşturulur (bkz. README.md). Bu yüzden "giriş yapmış olmak" = "admin olmak".
+// Ürün verisi asla herkese açık okunmaz; Facebook beslemesi ayrı bir CSV üzerinden yürür.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /products/{productId} {
+      allow read, write: if request.auth != null;
+    }
+
+    // Ürünlerde seçilebilen etiket listesi (Etiketler sayfası buradan yönetilir).
+    match /tags/{tagId} {
+      allow read, write: if request.auth != null;
+    }
+
+    // GitHub yayınlama ayarları (Personal Access Token dahil) — yalnızca giriş yapmış admin görebilir/değiştirebilir.
+    match /settings/{settingId} {
+      allow read, write: if request.auth != null;
+    }
+
+    // Panel içi aktivite kaydı (opsiyonel denetim izi) — yalnızca kendi girişini yazabilir.
+    match /activity/{entryId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null
+                    && request.resource.data.uid == request.auth.uid;
+      allow update, delete: if false;
+    }
+
+    // Tanımlanmamış tüm yollarda erişim kapalı.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

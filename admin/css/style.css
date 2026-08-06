@@ -383,9 +383,25 @@ td.actions { white-space: nowrap; text-align: right; }
   background: var(--surface);
   overflow: hidden;
   display: flex; align-items: center; justify-content: center;
+  position: relative;
 }
 .image-upload .thumb-box img, .image-upload .thumb-box video { width: 100%; height: 100%; object-fit: contain; }
 .image-upload .thumb-box.empty { color: var(--muted); font-size: 10px; text-align: center; }
+.thumb-remove {
+  position: absolute;
+  top: -6px; right: -6px;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 1px solid var(--surface);
+  background: var(--bad);
+  color: #fff;
+  font-size: 12px;
+  line-height: 1;
+  padding: 0;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+}
+.thumb-remove:hover { filter: brightness(1.12); }
 .image-upload-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
 .image-upload-body input[type='file'] { font-size: 12.5px; color: var(--muted); }
 .upload-status { font-size: 11.5px; color: var(--muted); display: flex; align-items: center; gap: 6px; min-height: 14px; }

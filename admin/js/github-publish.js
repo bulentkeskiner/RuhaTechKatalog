@@ -102,12 +102,16 @@ export async function uploadImageToGithub(file, settings, fileNameHint) {
 }
 
 const VIDEO_FOLDER = 'urun-videolari';
-const MAX_VIDEO_BYTES = 40 * 1024 * 1024; // GitHub API tek istekte ~100MB sınırlı; 40MB güvenli üst sınır.
+// GitHub Contents API (dosya oluşturma/güncelleme) tek istekte ~100MB base64 içerik kabul
+// ediyor; base64 kodlama ham dosyayı ~%33 büyüttüğü için 50MB'lık bir video ~67MB'a çıkar —
+// bu da sınırın altında kalıp isteğin zaman aşımına uğramaması için yeterli pay bırakıyor.
+const MAX_VIDEO_MB = 50;
+const MAX_VIDEO_BYTES = MAX_VIDEO_MB * 1024 * 1024;
 
 /** Bir ürün videosunu GitHub reposundaki urun-videolari/ klasörüne yükler. */
 export async function uploadVideoToGithub(file, settings, fileNameHint) {
   if (file.size > MAX_VIDEO_BYTES) {
-    throw new Error(`Video çok büyük (${(file.size / 1024 / 1024).toFixed(1)}MB). En fazla 40MB olmalı.`);
+    throw new Error(`Video çok büyük (${(file.size / 1024 / 1024).toFixed(1)}MB). En fazla ${MAX_VIDEO_MB}MB olmalı.`);
   }
   const path = buildUploadPath(file, fileNameHint, VIDEO_FOLDER);
   const base64 = arrayBufferToBase64(await file.arrayBuffer());

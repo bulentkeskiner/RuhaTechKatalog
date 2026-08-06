@@ -76,7 +76,7 @@ export const FORM_SECTIONS = [
       { key: 'link', label: 'Ürün Sayfası Linki', type: 'text', required: true, placeholder: 'https://wa.me/...' },
       { key: 'image_link', label: 'Ana Görsel', type: 'image', required: true },
       { key: 'additional_image_link', label: 'Ek Görseller', type: 'images', help: 'Birden fazla dosya seçebilirsiniz' },
-      { key: 'video_url', label: 'Ürün Videosu', type: 'video', help: 'İsteğe bağlı, en fazla 40MB' },
+      { key: 'video_url', label: 'Ürün Videosu', type: 'video', help: 'İsteğe bağlı, en fazla 50MB' },
     ],
   },
   {

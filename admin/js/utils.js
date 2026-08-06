@@ -66,6 +66,47 @@ export function toCSVRow(values) {
   return values.map(csvEscape).join(',');
 }
 
+/**
+ * Telefon fotoğrafları genelde birkaç MB olur; GitHub Contents API ~1MB üzeri
+ * dosyaları reddediyor. Yüklemeden önce görseli canvas üzerinden küçültüp
+ * sıkıştırarak bu sınırın altına indirir. Sıkıştırma başarısız/gereksizse
+ * (örn. zaten küçük, ya da tarayıcı decode edemedi) orijinal dosyayı döndürür.
+ */
+export async function compressImageFile(file, { maxDim = 1600, maxBytes = 900 * 1024, startQuality = 0.85 } = {}) {
+  if (!file.type || !file.type.startsWith('image/') || file.type === 'image/gif' || file.size <= maxBytes) return file;
+
+  let bitmap;
+  try { bitmap = await createImageBitmap(file); } catch (_) { return file; }
+
+  let { width, height } = bitmap;
+  if (width > maxDim || height > maxDim) {
+    const scale = maxDim / Math.max(width, height);
+    width = Math.round(width * scale);
+    height = Math.round(height * scale);
+  }
+
+  const canvas = document.createElement('canvas');
+  canvas.width = width;
+  canvas.height = height;
+  canvas.getContext('2d').drawImage(bitmap, 0, 0, width, height);
+  bitmap.close?.();
+
+  let quality = startQuality;
+  let blob = await canvasToBlob(canvas, quality);
+  while (blob && blob.size > maxBytes && quality > 0.35) {
+    quality -= 0.15;
+    blob = await canvasToBlob(canvas, quality);
+  }
+
+  if (!blob || blob.size >= file.size) return file;
+  const name = file.name.replace(/\.\w+$/, '') + '.jpg';
+  return new File([blob], name, { type: 'image/jpeg' });
+}
+
+function canvasToBlob(canvas, quality) {
+  return new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', quality));
+}
+
 export function downloadTextFile(filename, text, mime = 'text/csv;charset=utf-8') {
   const blob = new Blob([text], { type: mime });
   const url = URL.createObjectURL(blob);

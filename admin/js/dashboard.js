@@ -5,7 +5,7 @@ import {
   subscribeProducts, createProduct, updateProduct, deleteProduct,
   productExists, bulkUpsertProducts, getAllProductsOnce,
 } from './products-store.js';
-import { escapeHtml, debounce, toast, formatPrice, downloadTextFile } from './utils.js';
+import { escapeHtml, debounce, toast, formatPrice, downloadTextFile, compressImageFile } from './utils.js';
 import { productsToCSV, csvToProducts } from './csv.js';
 import {
   getGithubSettings, saveGithubSettings, publishCsvToGithub, publicRawUrl,
@@ -441,9 +441,16 @@ function updateImageThumb(key) {
   const box = document.getElementById(`pf_${key}_thumb`);
   const input = document.getElementById(`pf_${key}`);
   if (!box || !input) return;
+  const field = FORM_SECTIONS.flatMap((s) => s.fields).find((f) => f.key === key);
+  const removable = field && field.type === 'images';
   const urls = input.value.split(',').map((s) => s.trim()).filter(Boolean);
   if (!urls.length) { box.innerHTML = `<div class="thumb-box empty">Yok</div>`; return; }
-  box.innerHTML = urls.map((u) => `<div class="thumb-box"><img src="${escapeHtml(u)}" alt="" loading="lazy"></div>`).join('');
+  box.innerHTML = urls.map((u, i) => `
+    <div class="thumb-box">
+      <img src="${escapeHtml(u)}" alt="" loading="lazy">
+      ${removable ? `<button type="button" class="thumb-remove" data-remove-idx="${i}" title="Kaldır" aria-label="Görseli kaldır">×</button>` : ''}
+    </div>
+  `).join('');
 }
 
 function updateVideoPreview(key) {
@@ -472,6 +479,18 @@ function wireUploads() {
 
     textInput.addEventListener('input', () => updatePreview(key));
 
+    if (multiple) {
+      document.getElementById(`pf_${key}_thumb`).addEventListener('click', (e) => {
+        const btn = e.target.closest('.thumb-remove');
+        if (!btn) return;
+        const idx = parseInt(btn.dataset.removeIdx, 10);
+        const urls = textInput.value.split(',').map((s) => s.trim()).filter(Boolean);
+        urls.splice(idx, 1);
+        textInput.value = urls.join(',');
+        updatePreview(key);
+      });
+    }
+
     fileInput.addEventListener('change', async () => {
       const files = Array.from(fileInput.files || []);
       if (!files.length) return;
@@ -488,24 +507,29 @@ function wireUploads() {
 
       const existing = textInput.value.split(',').map((s) => s.trim()).filter(Boolean);
       let uploadedCount = 0;
+      const failed = [];
 
       for (const file of files) {
-        status.textContent = `Yükleniyor… (${uploadedCount + 1}/${files.length})`;
+        status.textContent = `Yükleniyor… (${uploadedCount + failed.length + 1}/${files.length})`;
         try {
-          const url = await uploadFn(file, githubSettings, idHint);
+          const toUpload = isVideo ? file : await compressImageFile(file);
+          const url = await uploadFn(toUpload, githubSettings, idHint);
           if (multiple) existing.push(url); else existing[0] = url;
           textInput.value = (multiple ? existing : [existing[0]]).join(',');
           updatePreview(key);
           uploadedCount++;
         } catch (err) {
-          status.textContent = 'Yüklenemedi: ' + err.message;
-          status.className = 'upload-status error';
-          fileInput.value = '';
-          return;
+          failed.push(`${file.name}: ${err.message}`);
         }
       }
-      status.textContent = `${uploadedCount} ${noun} yüklendi.`;
-      status.className = 'upload-status';
+
+      if (failed.length) {
+        status.textContent = `${uploadedCount}/${files.length} ${noun} yüklendi. Başarısız — ${failed.join(' · ')}`;
+        status.className = 'upload-status error';
+      } else {
+        status.textContent = `${uploadedCount} ${noun} yüklendi.`;
+        status.className = 'upload-status';
+      }
       fileInput.value = '';
     });
   }

@@ -68,12 +68,14 @@ async function putFileToGithub(path, base64Content, settings, commitMessage) {
   const body = { message: commitMessage, content: base64Content, branch, ...(sha ? { sha } : {}) };
   let putRes = await apiRequest(apiBase, settings, { method: 'PUT', body: JSON.stringify(body) });
 
-  if (!putRes.ok && putRes.status === 409) {
+  // Başka bir istemci (ör. eşzamanlı bir yayın veya elle yapılan bir commit) dosyayı
+  // arada değiştirmiş olabilir; sha eskimiş olur ve GitHub 409 döner. Güncel sha'yı
+  // tekrar okuyup birkaç kez deniyoruz.
+  for (let attempt = 0; !putRes.ok && putRes.status === 409 && attempt < 3; attempt++) {
     const retryGet = await apiRequest(`${apiBase}?ref=${encodeURIComponent(branch)}`, settings);
-    if (retryGet.ok) {
-      const data = await retryGet.json();
-      putRes = await apiRequest(apiBase, settings, { method: 'PUT', body: JSON.stringify({ ...body, sha: data.sha }) });
-    }
+    if (!retryGet.ok) break;
+    const data = await retryGet.json();
+    putRes = await apiRequest(apiBase, settings, { method: 'PUT', body: JSON.stringify({ ...body, sha: data.sha }) });
   }
   if (!putRes.ok) throw new Error(await githubErrorMessage(putRes));
 

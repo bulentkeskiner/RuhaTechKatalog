@@ -721,7 +721,7 @@ document.getElementById('testPublishBtn').addEventListener('click', async () => 
   await saveGithubSettings(s);
   githubSettings = { ...githubSettings, ...s };
   fillGithubForm(githubSettings);
-  await runPublish(true);
+  await queuePublish(true);
 });
 
 document.getElementById('copyPublicUrlBtn').addEventListener('click', async () => {
@@ -735,11 +735,35 @@ document.getElementById('copyPublicUrlBtn').addEventListener('click', async () =
   }
 });
 
-document.getElementById('publishNowBtn').addEventListener('click', () => runPublish(true));
+document.getElementById('publishNowBtn').addEventListener('click', () => queuePublish(true));
 
 /** Ürün ekle/güncelle/sil sonrası sessizce (arka planda) yayınlar; hata olursa toast gösterir. */
-async function autoPublish() {
-  runPublish(false);
+function autoPublish() {
+  queuePublish(false);
+}
+
+// runPublish, GitHub'daki dosyanın sha'sını okuyup üzerine yazdığı için aynı anda birden
+// fazla çalışırsa (örn. iki ürün art arda kaydedilirse) ikinci istek eski sha ile çakışıp
+// 409 hatası verir. Bu kuyruk aynı anda tek bir yayını garanti eder; yayın sürerken gelen
+// ek istekler, mevcut yayın bitince tek seferde (en güncel verilerle) tekrar çalıştırılır.
+let isPublishing = false;
+let publishPending = false;
+
+async function queuePublish(verbose) {
+  if (isPublishing) {
+    publishPending = true;
+    return;
+  }
+  isPublishing = true;
+  try {
+    await runPublish(verbose);
+  } finally {
+    isPublishing = false;
+    if (publishPending) {
+      publishPending = false;
+      queuePublish(false);
+    }
+  }
 }
 
 async function runPublish(verbose) {

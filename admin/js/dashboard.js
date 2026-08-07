@@ -563,8 +563,13 @@ productForm.addEventListener('submit', async (e) => {
   const data = readForm();
 
   if (!data.id) { toast('Ürün kodu (SKU) zorunludur.', 'err'); return; }
-  if (!data.title || !data.description || !data.brand || !data.link || !data.image_link) {
-    toast('Facebook için zorunlu alanları (★) doldurun.', 'err');
+  const REQUIRED_FIELD_LABELS = {
+    title: 'Ürün Adı', description: 'Açıklama', brand: 'Marka',
+    link: 'Ürün Sayfası Linki', image_link: 'Ana Görsel',
+  };
+  const missing = Object.keys(REQUIRED_FIELD_LABELS).filter((key) => !data[key]);
+  if (missing.length) {
+    toast(`Facebook için zorunlu alanları doldurun: ${missing.map((k) => REQUIRED_FIELD_LABELS[k]).join(', ')}`, 'err');
     return;
   }
   if (data.price === '' || isNaN(data.price)) { toast('Geçerli bir fiyat girin.', 'err'); return; }

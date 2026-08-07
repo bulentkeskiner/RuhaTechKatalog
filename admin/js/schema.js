@@ -31,6 +31,14 @@ export const FIELD_TO_CSV = {
 };
 export const CSV_TO_FIELD = Object.fromEntries(Object.entries(FIELD_TO_CSV).map(([k, v]) => [v, k]));
 
+// Yeni ürün eklerken "Ürün Sayfası Linki" alanı boş kalmasın diye kullanılan
+// varsayılan WhatsApp linki — şimdilik ürüne özel değil, genel bir mesaj.
+const WHATSAPP_PHONE = '905456387347';
+const DEFAULT_WHATSAPP_MESSAGE = 'Merhaba, bu ürünü satın almak istiyorum.';
+export function defaultWhatsAppLink() {
+  return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(DEFAULT_WHATSAPP_MESSAGE)}`;
+}
+
 // Formda hiç sorulmayan alanlar — kayıt anında (add/edit fark etmez) hep bu
 // değerlerle ezilir. Böylece eski (CSV'den içe aktarılmış) veriler de bir ürün
 // her düzenlendiğinde temizlenmiş olur.
@@ -73,7 +81,8 @@ export const FORM_SECTIONS = [
   {
     title: 'Bağlantılar ve Görseller',
     fields: [
-      { key: 'link', label: 'Ürün Sayfası Linki', type: 'text', required: true, placeholder: 'https://wa.me/...' },
+      { key: 'link', label: 'Ürün Sayfası Linki', type: 'text', required: true, placeholder: 'https://wa.me/...',
+        help: 'Genel bir WhatsApp mesajıyla otomatik dolduruldu; isterseniz değiştirebilirsiniz.' },
       { key: 'image_link', label: 'Ana Görsel', type: 'image', required: true },
       { key: 'additional_image_link', label: 'Ek Görseller', type: 'images', help: 'Birden fazla dosya seçebilirsiniz' },
       { key: 'video_url', label: 'Ürün Videosu', type: 'video', help: 'İsteğe bağlı, en fazla 50MB' },
@@ -104,5 +113,6 @@ export function emptyProduct() {
   for (const k of Object.keys(FIELD_TO_CSV)) p[k] = '';
   p.availability = 'in stock';
   p.condition = 'new';
+  p.link = defaultWhatsAppLink();
   return p;
 }

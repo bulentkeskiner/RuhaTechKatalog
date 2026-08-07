@@ -108,12 +108,12 @@ button { font-family: inherit; }
 }
 .login-card h1 { font-size: 20px; font-weight: 600; }
 .login-card p.sub { color: var(--muted); font-size: 13.5px; margin: 6px 0 24px; }
-.field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
-.field label { font-size: 12.5px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; }
+.field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; }
+.field label { font-size: 11.5px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; }
 .field input, .field select, .field textarea {
   font: inherit;
-  font-size: 14.5px;
-  padding: 10px 12px;
+  font-size: 13.5px;
+  padding: 8px 10px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
   background: var(--bg);
@@ -352,9 +352,9 @@ td.actions { white-space: nowrap; text-align: right; }
 .modal-head h2 { font-size: 17px; font-weight: 600; }
 .modal-close { background: none; border: none; color: var(--muted); cursor: pointer; padding: 4px; }
 .modal-body { padding: 22px; max-height: 70vh; overflow-y: auto; }
-.form-section + .form-section { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--border); }
-.form-section h4 { font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin-bottom: 12px; }
-.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; }
+.form-section + .form-section { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border); }
+.form-section h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin-bottom: 10px; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 14px; }
 .form-grid .span-2 { grid-column: 1 / -1; }
 .required-mark { color: var(--bad); }
 .modal-foot { padding: 16px 22px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 10px; }
@@ -404,6 +404,13 @@ td.actions { white-space: nowrap; text-align: right; }
 .thumb-remove:hover { filter: brightness(1.12); }
 .image-upload-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
 .image-upload-body input[type='file'] { font-size: 12.5px; color: var(--muted); }
+.image-upload-body input.url-readonly {
+  background: var(--surface-2);
+  color: var(--muted);
+  font-size: 12px;
+  cursor: default;
+}
+.image-upload-body input.url-readonly:focus { outline: none; }
 .upload-status { font-size: 11.5px; color: var(--muted); display: flex; align-items: center; gap: 6px; min-height: 14px; }
 .upload-status.uploading { color: var(--accent); }
 .upload-status.error { color: var(--bad); }
@@ -435,7 +442,10 @@ td.actions { white-space: nowrap; text-align: right; }
   .content { padding: 18px 14px 90px; }
   .two-col { grid-template-columns: 1fr; }
   .form-grid { grid-template-columns: 1fr; }
-  .field input, .field select, .field textarea { padding: 11px 12px; font-size: 16px; }
+  .field { margin-bottom: 10px; }
+  /* Font-size 16px'in altına inmemeli — iOS Safari daha küçük değerlerde inputa
+     dokununca sayfayı otomatik yakınlaştırır. Kompaktlık dolgudan (padding) geliyor. */
+  .field input, .field select, .field textarea { padding: 9px 11px; font-size: 16px; }
   .form-actions-bar { margin-left: -14px; margin-right: -14px; padding-left: 14px; padding-right: 14px; }
   .form-actions-bar .btn { flex: 1; }
   .image-upload { flex-direction: column; }
@@ -449,6 +459,41 @@ td.actions { white-space: nowrap; text-align: right; }
   tbody td.actions { justify-content: flex-end; }
   tbody td.actions::before { content: ''; }
   tbody td.thumb::before { content: ''; }
+
+  /* ---- Ürünler tablosu: özel kart görünümü ---- */
+  #productsTable tbody tr {
+    display: grid;
+    grid-template-columns: 72px 1fr 1fr;
+    grid-template-areas:
+      "thumb name  name"
+      "thumb brand price"
+      "thumb stock group"
+      "actions actions actions";
+    column-gap: 12px;
+    row-gap: 7px;
+    align-items: center;
+    padding: 14px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow);
+  }
+  #productsTable tbody td { padding: 0; }
+  #productsTable tbody td::before { content: none; }
+  #productsTable tbody td.thumb { grid-area: thumb; align-self: start; }
+  #productsTable tbody td.thumb img,
+  #productsTable tbody td.thumb .noimg { width: 72px; height: 72px; }
+  #productsTable tbody td.name { grid-area: name; display: block; }
+  #productsTable tbody td.name .title { font-size: 15px; }
+  #productsTable tbody td[data-label='Marka'] { grid-area: brand; font-size: 12.5px; color: var(--muted); }
+  #productsTable tbody td.price { grid-area: price; justify-self: end; font-size: 15px; }
+  #productsTable tbody td[data-label='Stok'] { grid-area: stock; }
+  #productsTable tbody td[data-label='Grup'] { grid-area: group; justify-self: end; font-size: 12.5px; color: var(--muted); }
+  #productsTable tbody td.actions {
+    grid-area: actions;
+    display: flex; justify-content: flex-end; gap: 8px;
+    padding-top: 10px; margin-top: 2px;
+    border-top: 1px solid var(--border);
+  }
+  #productsTable tbody td.actions .icon-btn { margin-left: 0; padding: 8px 11px; }
 }
 .sidebar-scrim { display: none; }
 @media (max-width: 860px) {

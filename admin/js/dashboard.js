@@ -350,7 +350,7 @@ function buildFormHTML() {
               <div class="image-upload">
                 <div class="thumbs" id="pf_${f.key}_thumb"><div class="thumb-box empty">Yok</div></div>
                 <div class="image-upload-body">
-                  <input id="pf_${f.key}" name="${f.key}" type="text" placeholder="Video seçin veya sürükleyin">
+                  <input id="pf_${f.key}" name="${f.key}" type="text" class="url-readonly" readonly tabindex="-1" placeholder="Aşağıdan video seçin">
                   <input type="file" id="pf_${f.key}_file" accept="video/*">
                   <div class="upload-status" id="pf_${f.key}_status"></div>
                 </div>
@@ -366,7 +366,7 @@ function buildFormHTML() {
               <div class="image-upload">
                 <div class="thumbs" id="pf_${f.key}_thumb"><div class="thumb-box empty">Yok</div></div>
                 <div class="image-upload-body">
-                  <input id="pf_${f.key}" name="${f.key}" type="text" ${f.required ? 'required' : ''} placeholder="${escapeHtml(f.placeholder || '')}">
+                  <input id="pf_${f.key}" name="${f.key}" type="text" class="url-readonly" readonly tabindex="-1" ${f.required ? 'required' : ''} placeholder="Aşağıdan görsel seçin">
                   <input type="file" id="pf_${f.key}_file" accept="image/*"${multiple}>
                   <div class="upload-status" id="pf_${f.key}_status"></div>
                 </div>

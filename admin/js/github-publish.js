@@ -40,6 +40,10 @@ function arrayBufferToBase64(buf) {
 async function apiRequest(url, settings, options = {}) {
   return fetch(url, {
     ...options,
+    // GitHub, contents GET yanıtlarını önbelleklenebilir (ETag/Cache-Control) döner;
+    // 'no-store' olmadan tarayıcı, sha yeniden okunurken aynı eski yanıtı önbellekten
+    // verip 409 sonrası retry'ı da aynı bayat sha ile başarısız kılabilir.
+    cache: 'no-store',
     headers: {
       Authorization: `Bearer ${settings.token}`,
       Accept: 'application/vnd.github+json',

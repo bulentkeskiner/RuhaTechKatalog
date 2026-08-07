@@ -785,7 +785,9 @@ async function runPublish(verbose) {
     if (verbose) toast('Katalog GitHub\'a yayınlandı.');
   } catch (err) {
     publishStatusEl.textContent = 'Facebook beslemesi güncellenemedi: ' + err.message;
-    toast('Yayınlanamadı: ' + err.message, 'err');
+    // Otomatik (sessiz) yayınlar başarısız olduğunda kullanıcıyı uyarı balonuyla rahatsız
+    // etmiyoruz; hata durum satırında görünür kalır. Manuel yayınlarda uyarı gösterilir.
+    if (verbose) toast('Yayınlanamadı: ' + err.message, 'err');
   }
 }
 

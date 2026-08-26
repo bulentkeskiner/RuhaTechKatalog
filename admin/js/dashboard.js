@@ -679,53 +679,6 @@ csvImportInput.addEventListener('change', async () => {
 });
 
 // ---------------------------------------------------------------------------
-// CSV -> Firebase senkronizasyonu (elle düzenlenen CSV, panelden değil doğrudan
-// dosyada değiştirildiğinde Firestore ile arada oluşan uyuşmazlığı gidermek için).
-// Yanlışlıkla tıklanıp toplu veri üzerine yazılmasını önlemek amacıyla parola sorulur.
-// ---------------------------------------------------------------------------
-const CSV_SYNC_PASSWORD = '571632';
-const csvSyncInput = document.getElementById('csvSyncInput');
-
-document.getElementById('csvSyncBtn').addEventListener('click', () => {
-  const pass = prompt('Bu işlem CSV dosyasındaki verileri Firebase ürün tablosuna yazacak.\nDevam etmek için şifreyi girin:');
-  if (pass === null) return;
-  if (pass !== CSV_SYNC_PASSWORD) {
-    toast('Şifre hatalı. İşlem iptal edildi.', 'err');
-    return;
-  }
-  csvSyncInput.click();
-});
-
-csvSyncInput.addEventListener('change', async () => {
-  const file = csvSyncInput.files[0];
-  if (!file) return;
-  const text = await file.text();
-  csvSyncInput.value = '';
-
-  let parsed;
-  try {
-    parsed = csvToProducts(text);
-  } catch (err) {
-    toast('CSV okunamadı: ' + err.message, 'err');
-    return;
-  }
-  if (!parsed.products.length) { toast('CSV içinde ürün bulunamadı.', 'err'); return; }
-
-  const ok = confirm(`${parsed.products.length} ürün Firebase ile senkronize edilecek (aynı koda sahip ürünler güncellenir, CSV'de olmayanlar silinmez). Devam edilsin mi?`);
-  if (!ok) return;
-
-  toast(`Senkronize ediliyor: 0 / ${parsed.products.length}...`);
-  try {
-    await bulkUpsertProducts(parsed.products, (done, totalCount) => {
-      if (done === totalCount) toast(`${totalCount} ürün Firebase ile senkronize edildi.`);
-    });
-    autoPublish();
-  } catch (err) {
-    toast('Senkronizasyon hatası: ' + err.message, 'err');
-  }
-});
-
-// ---------------------------------------------------------------------------
 // GitHub / Facebook yayınlama
 // ---------------------------------------------------------------------------
 const publishStatusRow = document.getElementById('publishStatusRow');

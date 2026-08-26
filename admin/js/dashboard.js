@@ -151,18 +151,18 @@ function renderStats() {
     </div>
   `).join('');
 
-  renderBreakdown('groupBreakdown', products, 'product_tags_0');
-  renderBreakdown('brandBreakdown', products, 'brand');
+  renderBreakdown('groupBreakdown', products, 'product_tags_0', Infinity);
+  renderBreakdown('brandBreakdown', products, 'brand', 8);
 }
 
-function renderBreakdown(elId, list, field) {
+function renderBreakdown(elId, list, field, limit = 8) {
   const counts = {};
   for (const p of list) {
     const k = (p[field] || '').trim();
     if (!k) continue;
     counts[k] = (counts[k] || 0) + 1;
   }
-  const entries = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 8);
+  const entries = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, limit);
   const max = entries.length ? entries[0][1] : 1;
   const el = document.getElementById(elId);
   if (!entries.length) { el.innerHTML = '<p style="color:var(--muted); font-size:13px;">Veri yok.</p>'; return; }

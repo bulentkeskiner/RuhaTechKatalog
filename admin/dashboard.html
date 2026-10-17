@@ -8,7 +8,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<!-- Fiyat listesi PDF şablonlarının yazı tipleri -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=DM+Sans:wght@400;500;700&family=Fraunces:wght@600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/pricelist.css">
 </head>
 <body>
 
@@ -28,6 +31,10 @@
       <button class="nav-item" data-view="productsView" data-route="#/products">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 7 12 3 4 7v10l8 4 8-4V7Z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg>
         Ürünler
+      </button>
+      <button class="nav-item" data-view="priceListView" data-route="#/pricelist">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg>
+        Fiyat Listesi
       </button>
       <button class="nav-item" data-view="tagsView" data-route="#/tags">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.6 12.3 12.7 20.2a2 2 0 0 1-2.8 0l-6.1-6.1a2 2 0 0 1 0-2.8L11.7 3.3A2 2 0 0 1 13.1 2.7L20 3l.3 6.9a2 2 0 0 1-.6 1.4Z"/><circle cx="15.5" cy="7.5" r="1.2"/></svg>
@@ -140,6 +147,100 @@
               </thead>
               <tbody id="productsTbody"></tbody>
             </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= FİYAT LİSTESİ ================= -->
+      <section class="view" id="priceListView">
+        <div class="page-head">
+          <div>
+            <h1>Fiyat Listesi</h1>
+            <p>Ürünleri seçin, şablonu belirleyin, PDF'i oluşturup paylaşın.</p>
+          </div>
+        </div>
+
+        <div class="pl-steps" role="tablist" aria-label="Adımlar">
+          <button type="button" class="pl-step active" data-step="1" role="tab"><span class="num">1</span>Ürünler<span class="pl-step-count" id="plStepCount"></span></button>
+          <button type="button" class="pl-step" data-step="2" role="tab"><span class="num">2</span>Şablon &amp; Önizleme</button>
+        </div>
+
+        <!-- Adım 1: ürün seçimi -->
+        <div class="pl-pane" id="plStep1">
+          <label class="pl-search">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="plSearch" type="search" placeholder="Ürün adı veya kodu ara…" autocomplete="off" aria-label="Ürün ara">
+          </label>
+          <div class="group-scroller" id="plChips"></div>
+          <div class="pl-bulk">
+            <button type="button" class="btn btn-sm" id="plSelectAll">Tümünü seç</button>
+            <button type="button" class="btn btn-sm" id="plUnselectAll">Seçimi kaldır</button>
+            <span class="count-chip" id="plVisibleCount"></span>
+          </div>
+          <div class="pl-list" id="plList"></div>
+          <div class="pl-actionbar">
+            <div class="pl-actionbar-info"><strong id="plSelCount">0</strong> ürün seçildi <button type="button" class="pl-linkbtn" id="plClearAll" hidden>Temizle</button></div>
+            <button type="button" class="btn btn-primary" id="plNext">
+              Devam
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Adım 2: şablon, seçenekler, önizleme -->
+        <div class="pl-pane" id="plStep2" hidden>
+          <div class="pl-design">
+            <div class="pl-options">
+              <div class="pl-label">Şablon</div>
+              <div class="pl-templates" id="plTemplates"></div>
+
+              <div class="pl-label">Seçenekler</div>
+              <div class="panel pl-opt-panel">
+                <label class="pl-switch"><span>Kategorilere ayır</span><input type="checkbox" id="plGroup"></label>
+                <label class="pl-switch"><span>Ürün kodlarını göster</span><input type="checkbox" id="plShowCode"></label>
+                <label class="pl-switch"><span>Sıralama</span>
+                  <select id="plSort">
+                    <option value="title">Ürün adı (A–Z)</option>
+                    <option value="priceAsc">Fiyat (artan)</option>
+                    <option value="priceDesc">Fiyat (azalan)</option>
+                    <option value="code">Ürün kodu</option>
+                  </select>
+                </label>
+                <details class="pl-texts">
+                  <summary>Başlık ve yazılar
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+                  </summary>
+                  <div class="pl-texts-body">
+                    <div class="field"><label for="plText_title">Başlık</label><input id="plText_title" type="text" maxlength="40"></div>
+                    <div class="field"><label for="plText_badge">Etiket</label><input id="plText_badge" type="text" maxlength="24" placeholder="Boş bırakılabilir"></div>
+                    <div class="field"><label for="plText_subtitle">Alt başlık</label><input id="plText_subtitle" type="text" maxlength="60" placeholder="Boş bırakılabilir"></div>
+                    <div class="field"><label for="plText_brand">Firma adı</label><input id="plText_brand" type="text" maxlength="30"></div>
+                    <div class="field">
+                      <label for="plText_contact">İletişim (alt bilgi)</label>
+                      <input id="plText_contact" type="text" maxlength="60">
+                      <div class="help-text">Telefon numarası yazılıysa, PDF'te bir ürüne dokununca bu numaraya o ürünü soran WhatsApp mesajı açılır.</div>
+                    </div>
+                    <button type="button" class="pl-linkbtn" id="plResetTexts" style="padding-left:0;">Varsayılanlara dön</button>
+                  </div>
+                </details>
+              </div>
+            </div>
+
+            <div class="pl-preview-col">
+              <div class="pl-preview-head">
+                <div class="pl-label">Önizleme</div>
+                <span class="count-chip" id="plPageCount"></span>
+              </div>
+              <div class="pl-preview" id="plPreview"></div>
+            </div>
+          </div>
+
+          <div class="pl-actionbar">
+            <button type="button" class="btn" id="plBack">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
+              Ürünler
+            </button>
+            <button type="button" class="btn btn-primary" id="plGenerate" disabled>PDF Oluştur</button>
           </div>
         </div>
       </section>
@@ -263,6 +364,31 @@
     <div class="modal-foot">
       <button type="button" class="btn" id="cancelDeleteBtn">Vazgeç</button>
       <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Sil</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= FİYAT LİSTESİ PDF ================= -->
+<div class="modal-overlay pl-modal" id="plModal" role="dialog" aria-modal="true" aria-labelledby="plModalTitle">
+  <div class="modal">
+    <div class="modal-body">
+      <div id="plModalBusy">
+        <div class="pl-modal-title" id="plModalTitle">PDF hazırlanıyor</div>
+        <div class="pl-progress"><div class="pl-progress-bar" id="plProgressBar"></div></div>
+        <div class="pl-modal-sub" id="plProgressText"></div>
+      </div>
+      <div id="plModalDone" hidden>
+        <div class="pl-done-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+        </div>
+        <div class="pl-modal-title">PDF hazır</div>
+        <div class="pl-modal-sub" id="plDoneInfo"></div>
+        <div class="pl-modal-actions">
+          <button type="button" class="btn btn-primary btn-block" id="plShare">Paylaş (WhatsApp vb.)</button>
+          <button type="button" class="btn btn-block" id="plDownload">İndir</button>
+          <button type="button" class="btn btn-block pl-btn-ghost" id="plModalClose">Kapat</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

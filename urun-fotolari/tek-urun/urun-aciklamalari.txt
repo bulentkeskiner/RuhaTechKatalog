@@ -1,0 +1,1219 @@
+RUHATECH - KATEGORI BASINA ORNEK URUN ACIKLAMALARI (4. TUR - KALAN TUM URUNLER)
+=====================================================
+NOT: Bu turde, fotografi bulunan ve daha once kullanilmamis TUM urunler
+eklenmistir (kategori basina sinirlama yoktur).
+
+KATEGORI: Araç Aksesuar
+URUN: Araç akü takviye A9933
+ACIKLAMA: LCD göstergeli, 1200A tepe akımlı lastik şişirme ve akü takviye cihazı.
+OZELLIKLERI:
+- Kaliteli ve dayanıklı yapı
+- Günlük kullanıma uygun tasarım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç Aux 2M AC02
+ACIKLAMA: 2 metre uzunluğunda araç için Aux ses kablosu.
+OZELLIKLERI:
+- Aux girişi ile ses aktarımı
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç Type-C Aux kablo ARB514
+ACIKLAMA: Type-C to Aux ses dönüştürücü kablo.
+OZELLIKLERI:
+- Type-C giriş/çıkış uyumlu
+- Aux girişi ile ses aktarımı
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç iOS Aux ARB515
+ACIKLAMA: Lightning to Aux ses dönüştürücü kablo.
+OZELLIKLERI:
+- iOS (Lightning) uyumlu
+- Aux girişi ile ses aktarımı
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç iOS Şarj Seti ARB606
+ACIKLAMA: Çift USB girişli 3.1A araç şarj aleti ve Lightning kablo seti.
+OZELLIKLERI:
+- iOS (Lightning) uyumlu
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç başlığı 3.1A ARB607
+ACIKLAMA: 3.1A çift USB çıkışlı araç şarj başlığı.
+OZELLIKLERI:
+- 3.1A yüksek amper desteği
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç tutucu ARB610
+ACIKLAMA: 360 derece döner, MagSafe uyumlu araç telefon tutucusu.
+OZELLIKLERI:
+- Araç içinde güvenli ve sağlam tutuş
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç tutucu ARB612
+ACIKLAMA: Havalandırma montajlı araç telefon tutucusu.
+OZELLIKLERI:
+- Araç içinde güvenli ve sağlam tutuş
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç tutucu ARB613
+ACIKLAMA: Manyetik araç içi telefon tutucusu.
+OZELLIKLERI:
+- Araç içinde güvenli ve sağlam tutuş
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Bisiklet tutucu ARB616
+ACIKLAMA: 360 derece döner bisiklet telefon tutucusu.
+OZELLIKLERI:
+- Araç içinde güvenli ve sağlam tutuş
+- Bisiklet gidonuna kolay montaj
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç başlığı 36W mini ARB617
+ACIKLAMA: 36W mini boy hızlı araç şarj başlığı.
+OZELLIKLERI:
+- 36W hızlı şarj gücü
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç şarj 45W ARB618
+ACIKLAMA: PD 45W + QC3.0 hızlı araç şarj başlığı.
+OZELLIKLERI:
+- 45W hızlı şarj gücü
+- Power Delivery (PD) destegi
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç tutucu ARB619
+ACIKLAMA: MagSafe uyumlu, 360 derece döner araç telefon tutucusu.
+OZELLIKLERI:
+- Araç içinde güvenli ve sağlam tutuş
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç Bluetooth FM Verici ARB619
+ACIKLAMA: 30W hızlı şarjlı, çift USB çıkışlı Bluetooth FM verici araç MP3 çalar.
+OZELLIKLERI:
+- Kablosuz Bluetooth bağlantı
+- Bluetooth FM verici ile müzik/arama desteği
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç başlığı 12W CR001
+ACIKLAMA: 12W USB çıkışlı araç şarj başlığı.
+OZELLIKLERI:
+- 12W hızlı şarj gücü
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç tutucu CXP031
+ACIKLAMA: Cam montajlı, 3 noktadan kavramalı araç telefon tutucusu.
+OZELLIKLERI:
+- Araç içinde güvenli ve sağlam tutuş
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç başlığı 38W DC10
+ACIKLAMA: 38W çift USB çıkışlı hızlı araç şarj başlığı.
+OZELLIKLERI:
+- 38W hızlı şarj gücü
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç başlığı 68W DC12
+ACIKLAMA: 68W çift USB çıkışlı hızlı araç şarj başlığı.
+OZELLIKLERI:
+- 68W hızlı şarj gücü
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç tutucu DX10
+ACIKLAMA: Torpido montajlı, emme kavramalı araç telefon tutucusu.
+OZELLIKLERI:
+- Araç içinde güvenli ve sağlam tutuş
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç tutucu DX11
+ACIKLAMA: Torpido montajlı araç telefon standı.
+OZELLIKLERI:
+- Araç içinde güvenli ve sağlam tutuş
+- Ayarlanabilir açı ve yükseklik
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç tutucu G118
+ACIKLAMA: MagSafe uyumlu, 360 derece ayarlanabilir araç telefon tutucusu.
+OZELLIKLERI:
+- Araç içinde güvenli ve sağlam tutuş
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç Telefon Tutucu 360°
+ACIKLAMA: 360 derece döner, vantuzlu araç telefon tutucusu.
+OZELLIKLERI:
+- Araç içinde güvenli ve sağlam tutuş
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç Dikiz Aynası Telefon Tutucu
+ACIKLAMA: Dikiz aynasına takılan araç telefon tutucusu.
+OZELLIKLERI:
+- Araç içinde güvenli ve sağlam tutuş
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç Ön Cam Telefon Tutucu (Vantuzlu)
+ACIKLAMA: Ön cama vantuzla sabitlenen araç telefon tutucusu.
+OZELLIKLERI:
+- Araç içinde güvenli ve sağlam tutuş
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç Bluetooth FM Verici (Heartz)
+ACIKLAMA: Çift USB çıkışlı, hızlı şarj destekli Bluetooth FM verici araç şarj cihazı.
+OZELLIKLERI:
+- Kablosuz Bluetooth bağlantı
+- Bluetooth FM verici ile müzik/arama desteği
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç tutucu LD13
+ACIKLAMA: Masaüstü/araç için katlanabilir telefon tutucusu.
+OZELLIKLERI:
+- Araç içinde güvenli ve sağlam tutuş
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç MP3 30W M10
+ACIKLAMA: 30W hızlı şarjlı, Bluetooth FM verici araç MP3 çalar.
+OZELLIKLERI:
+- 30W hızlı şarj gücü
+- Kablosuz Bluetooth bağlantı
+- Bluetooth FM verici ile müzik/arama desteği
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç MP3 30W M11
+ACIKLAMA: 30W hızlı şarjlı, Bluetooth FM verici araç MP3 çalar.
+OZELLIKLERI:
+- 30W hızlı şarj gücü
+- Kablosuz Bluetooth bağlantı
+- Bluetooth FM verici ile müzik/arama desteği
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç MP3 48W M12
+ACIKLAMA: 48W hızlı şarjlı, Bluetooth FM verici araç MP3 çalar.
+OZELLIKLERI:
+- 48W hızlı şarj gücü
+- Kablosuz Bluetooth bağlantı
+- Bluetooth FM verici ile müzik/arama desteği
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç Aux kablo MK031
+ACIKLAMA: Araç için Aux ses kablosu.
+OZELLIKLERI:
+- Aux girişi ile ses aktarımı
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç iOS Aux NV11
+ACIKLAMA: iOS (Lightning) to 3.5mm Aux ses dönüştürücü kablo.
+OZELLIKLERI:
+- iOS (Lightning) uyumlu
+- Aux girişi ile ses aktarımı
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç MP3 20W PD01
+ACIKLAMA: PD 20W + QC3.0 hızlı şarjlı, çok fonksiyonlu kablosuz FM verici araç şarj cihazı.
+OZELLIKLERI:
+- 20W hızlı şarj gücü
+- Power Delivery (PD) destegi
+- Bluetooth FM verici ile müzik/arama desteği
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç tutucu ve şarj W10
+ACIKLAMA: MagSafe uyumlu araç telefon tutucusu ve kablosuz şarj cihazı.
+OZELLIKLERI:
+- Araç içinde güvenli ve sağlam tutuş
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Araç Aksesuar
+URUN: Araç MP3 X8
+ACIKLAMA: Bluetooth 5.0, çift USB hızlı şarjlı FM verici araç MP3 çalar.
+OZELLIKLERI:
+- Kablosuz Bluetooth bağlantı
+- Bluetooth FM verici ile müzik/arama desteği
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: BT Kulaklık Grubu
+URUN: BT Kulaklık makaralı ARB703
+ACIKLAMA: Klipsli, kablosuz makaralı Bluetooth kulaklık.
+OZELLIKLERI:
+- Kablosuz Bluetooth bağlantı
+- Makaralı taşıma, düzenli saklama
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: BT Kulaklık Grubu
+URUN: Kablosuz Kulaklık ANC ARB707
+ACIKLAMA: Aktif gürültü engellemeli (ANC), Hi-Fi ses kaliteli kablosuz TWS kulaklık.
+OZELLIKLERI:
+- Aktif gürültü engelleme (ANC)
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: BT Kulaklık Grubu
+URUN: Kablosuz Kulaklık Extra Bass ARB708
+ACIKLAMA: Ekstra bas destekli kablosuz TWS kulaklık.
+OZELLIKLERI:
+- Extra bass güçlü ses
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: BT Kulaklık Grubu
+URUN: BT Kulaklık makaralı BT12
+ACIKLAMA: Kulak içi kablosuz makaralı Bluetooth kulaklık.
+OZELLIKLERI:
+- Kablosuz Bluetooth bağlantı
+- Makaralı taşıma, düzenli saklama
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: BT Kulaklık Grubu
+URUN: BT Kulaklık BT20
+ACIKLAMA: Kulak üstü kablosuz Bluetooth kulaklık.
+OZELLIKLERI:
+- Kablosuz Bluetooth bağlantı
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: BT Kulaklık Grubu
+URUN: BT Kulaklık H10 cat
+ACIKLAMA: Kedi kulaklı, kulak üstü kablosuz Bluetooth kulaklık, 5 farklı renk seçeneği.
+OZELLIKLERI:
+- Kablosuz Bluetooth bağlantı
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: BT Kulaklık Grubu
+URUN: BT Kulaklık LS09
+ACIKLAMA: Kulak içi kablosuz Bluetooth kulaklık, spor kullanıma uygun.
+OZELLIKLERI:
+- Kablosuz Bluetooth bağlantı
+- Spor kullanıma uygun, ter/su dayanımlı tasarım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: BT Kulaklık Grubu
+URUN: BT Kulaklık spor LS097
+ACIKLAMA: Boyun bantlı, spor kullanıma uygun kablosuz Bluetooth kulaklık.
+OZELLIKLERI:
+- Kablosuz Bluetooth bağlantı
+- Spor kullanıma uygun, ter/su dayanımlı tasarım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: BT Kulaklık Grubu
+URUN: BT Kulaklık spor LS102
+ACIKLAMA: Boyun bantlı, spor kullanıma uygun kablosuz Bluetooth kulaklık.
+OZELLIKLERI:
+- Kablosuz Bluetooth bağlantı
+- Spor kullanıma uygun, ter/su dayanımlı tasarım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Kablo Grubu
+URUN: Kablo iOS 3.1A ARB052
+ACIKLAMA: 3.1A iOS (Lightning) hızlı şarj/data kablosu.
+OZELLIKLERI:
+- 3.1A yüksek amper desteği
+- iOS (Lightning) uyumlu
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Kablo Grubu
+URUN: Kablo Type-C 3.1A ARB056
+ACIKLAMA: 3.1A Type-C hızlı şarj/data kablosu.
+OZELLIKLERI:
+- 3.1A yüksek amper desteği
+- Type-C giriş/çıkış uyumlu
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Kablo Grubu
+URUN: Kablo iOS 27W ARB076
+ACIKLAMA: 27W Type-C to Lightning hızlı şarj kablosu.
+OZELLIKLERI:
+- 27W hızlı şarj gücü
+- Type-C giriş/çıkış uyumlu
+- iOS (Lightning) uyumlu
+---------------------------------------------------
+
+KATEGORI: Kablo Grubu
+URUN: Kablo micro 5A ARB100
+ACIKLAMA: 5A micro USB hızlı şarj kablosu.
+OZELLIKLERI:
+- 5A yüksek amper desteği
+- Micro USB uyumlu
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Kablo Grubu
+URUN: Kablo 4in1 65W ARB121
+ACIKLAMA: 65W 4in1 çoklu hızlı şarj kablosu.
+OZELLIKLERI:
+- 65W hızlı şarj gücü
+- 4'ü 1 arada çoklu uyumluluk
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Kablo Grubu
+URUN: Kablo PD PD 60W ARB122
+ACIKLAMA: 60W Type-C to Type-C hızlı şarj kablosu.
+OZELLIKLERI:
+- 60W hızlı şarj gücü
+- Power Delivery (PD) destegi
+- Type-C to Type-C kablo dahil
+---------------------------------------------------
+
+KATEGORI: Kablo Grubu
+URUN: Kablo PD iOS 30W ARB123
+ACIKLAMA: 30W Type-C to Lightning hızlı şarj kablosu.
+OZELLIKLERI:
+- 30W hızlı şarj gücü
+- Power Delivery (PD) destegi
+- Type-C giriş/çıkış uyumlu
+---------------------------------------------------
+
+KATEGORI: Kablo Grubu
+URUN: Kablo 3in1 ARB125
+ACIKLAMA: 3in1 (iOS/Type-C/Micro) çoklu hızlı şarj kablosu.
+OZELLIKLERI:
+- Type-C giriş/çıkış uyumlu
+- Micro USB uyumlu
+- iOS (Lightning) uyumlu
+---------------------------------------------------
+
+KATEGORI: Kablo Grubu
+URUN: Kablo 4in1 240W ARB129
+ACIKLAMA: 240W güç aktarımı destekleyen, USB-A/Type-C girişli 4'ü 1 arada hızlı şarj kablosu.
+OZELLIKLERI:
+- 240W hızlı şarj gücü
+- Type-C giriş/çıkış uyumlu
+- 4'ü 1 arada çoklu uyumluluk
+---------------------------------------------------
+
+KATEGORI: Kablo Grubu
+URUN: Kablo PD PD 240W ARB130
+ACIKLAMA: 240W ultra hızlı Type-C to Type-C şarj kablosu.
+OZELLIKLERI:
+- 240W hızlı şarj gücü
+- Power Delivery (PD) destegi
+- Type-C to Type-C kablo dahil
+---------------------------------------------------
+
+KATEGORI: Kablo Grubu
+URUN: Kablo Spiral 4in1 65W ARB132
+ACIKLAMA: 65W spiral tasarımlı, USB-A/Type-C girişli, Type-C&Lightning çıkışlı 4in1 hızlı şarj kablosu.
+OZELLIKLERI:
+- 65W hızlı şarj gücü
+- Type-C giriş/çıkış uyumlu
+- iOS (Lightning) uyumlu
+---------------------------------------------------
+
+KATEGORI: Kablo Grubu
+URUN: Bileklik Şarj Kablosu 2in1 ARB133
+ACIKLAMA: Bilekliğe takılabilen taşınabilir 2'si 1 arada şarj kablosu.
+OZELLIKLERI:
+- 2'si 1 arada kullanım
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Kablo Grubu
+URUN: Kablo iOS 6A ARB306
+ACIKLAMA: 6A iOS (Lightning) data ve şarj kablosu.
+OZELLIKLERI:
+- 6A yüksek amper desteği
+- iOS (Lightning) uyumlu
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Kablo Grubu
+URUN: Kablo Type-C 6A 120W
+ACIKLAMA: 6A 120W hızlı şarj destekli Type-C kablo, Xiaomi/Redmi uyumlu.
+OZELLIKLERI:
+- 120W hızlı şarj gücü
+- 6A yüksek amper desteği
+- Type-C giriş/çıkış uyumlu
+---------------------------------------------------
+
+KATEGORI: Kablo Grubu
+URUN: Kablo Type-C DLX-S26
+ACIKLAMA: Type-C to Type-C hızlı şarj kablosu.
+OZELLIKLERI:
+- Type-C to Type-C kablo dahil
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Kablo Grubu
+URUN: Kablo power 240W
+ACIKLAMA: 240W güçlü şarj (power) kablosu.
+OZELLIKLERI:
+- 240W hızlı şarj gücü
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Kablo Grubu
+URUN: Kablo Type-C 67W hızlı
+ACIKLAMA: 67W Type-C hızlı şarj kablosu.
+OZELLIKLERI:
+- 67W hızlı şarj gücü
+- Type-C giriş/çıkış uyumlu
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Kablo Grubu
+URUN: Kablo PD PD 100W DX04
+ACIKLAMA: 100W Type-C to Type-C hızlı şarj kablosu.
+OZELLIKLERI:
+- 100W hızlı şarj gücü
+- Power Delivery (PD) destegi
+- Type-C to Type-C kablo dahil
+---------------------------------------------------
+
+KATEGORI: Kablo Grubu
+URUN: Kablo PD PD 66W DX05
+ACIKLAMA: 66W Type-C to Type-C hızlı şarj kablosu.
+OZELLIKLERI:
+- 66W hızlı şarj gücü
+- Power Delivery (PD) destegi
+- Type-C to Type-C kablo dahil
+---------------------------------------------------
+
+KATEGORI: Kablo Grubu
+URUN: Kablo Type-C (Jenerik)
+ACIKLAMA: Type-C hızlı şarj/data kablosu.
+OZELLIKLERI:
+- Type-C giriş/çıkış uyumlu
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Kablo Grubu
+URUN: Kablo PD iOS 20W RH01
+ACIKLAMA: 20W Type-C to Lightning hızlı şarj kablosu.
+OZELLIKLERI:
+- 20W hızlı şarj gücü
+- Power Delivery (PD) destegi
+- Type-C giriş/çıkış uyumlu
+---------------------------------------------------
+
+KATEGORI: Kablo Grubu
+URUN: Kablo PD PD 60W RH02
+ACIKLAMA: 60W Type-C to Type-C hızlı şarj kablosu.
+OZELLIKLERI:
+- 60W hızlı şarj gücü
+- Power Delivery (PD) destegi
+- Type-C to Type-C kablo dahil
+---------------------------------------------------
+
+KATEGORI: Kablo Grubu
+URUN: Kablo iOS VTX400
+ACIKLAMA: iOS (Lightning) hızlı şarj kablosu.
+OZELLIKLERI:
+- iOS (Lightning) uyumlu
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Şarj Başlığı
+URUN: Şarj Başlığı 25W PD ARB026
+ACIKLAMA: 25W Power Delivery destekli hızlı şarj başlığı.
+OZELLIKLERI:
+- 25W hızlı şarj gücü
+- Power Delivery (PD) destegi
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Şarj Başlığı
+URUN: Şarj Başlığı 10W USB VTX001
+ACIKLAMA: 10W USB bağlantılı şarj başlığı.
+OZELLIKLERI:
+- 10W hızlı şarj gücü
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Şarj Başlığı
+URUN: Şarj Başlığı 13W USB VTX002
+ACIKLAMA: 13W USB bağlantılı şarj başlığı.
+OZELLIKLERI:
+- 13W hızlı şarj gücü
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Bilgisayar Aksesuar
+URUN: Kablosuz Mouse (Heartz)
+ACIKLAMA: 2.4GHz kablosuz, sessiz tuşlu optik mouse, siyah/beyaz renk seçenekli.
+OZELLIKLERI:
+- Kablosuz bağlantı
+- Ergonomik tasarım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Şarj Grubu
+URUN: Şarj 18W micro ARB013
+ACIKLAMA: 18W micro USB uyumlu hızlı şarj adaptörü ve kablo seti.
+OZELLIKLERI:
+- 18W hızlı şarj gücü
+- Micro USB uyumlu
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Şarj Grubu
+URUN: Şarj 18W Type-C ARB013
+ACIKLAMA: 18W Type-C uyumlu hızlı şarj adaptörü ve kablo seti.
+OZELLIKLERI:
+- 18W hızlı şarj gücü
+- Type-C giriş/çıkış uyumlu
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Şarj Grubu
+URUN: Şarj 25W USB Type-C ARB015
+ACIKLAMA: 25W USB çıkışlı, Type-C kablolu hızlı şarj adaptörü seti.
+OZELLIKLERI:
+- 25W hızlı şarj gücü
+- Type-C giriş/çıkış uyumlu
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Şarj Grubu
+URUN: Şarj 45W PD iOS Set
+ACIKLAMA: 45W GaN teknolojili şarj adaptörü ve Type-C to Lightning kablo seti.
+OZELLIKLERI:
+- GaN teknolojisi ile kompakt ve yüksek verim
+- 45W hızlı şarj gücü
+- Power Delivery (PD) destegi
+---------------------------------------------------
+
+KATEGORI: Şarj Grubu
+URUN: Şarj 25W PD iOS Set
+ACIKLAMA: 25W GaN teknolojili, çift Type-C çıkışlı şarj adaptörü ve Type-C to Lightning kablo seti.
+OZELLIKLERI:
+- GaN teknolojisi ile kompakt ve yüksek verim
+- 25W hızlı şarj gücü
+- Power Delivery (PD) destegi
+---------------------------------------------------
+
+KATEGORI: Şarj Grubu
+URUN: Şarj 25W PD TYPE-C
+ACIKLAMA: Şarj
+OZELLIKLERI:
+- 25W hızlı şarj gücü
+- Power Delivery (PD) destegi
+- Type-C giriş/çıkış uyumlu
+---------------------------------------------------
+
+KATEGORI: Şarj Grubu
+URUN: Şarj 25W PD iOS ARB-CH06
+ACIKLAMA: 25W GaN teknolojili şarj adaptörü ve Type-C to Lightning kablo seti.
+OZELLIKLERI:
+- GaN teknolojisi ile kompakt ve yüksek verim
+- 25W hızlı şarj gücü
+- Power Delivery (PD) destegi
+---------------------------------------------------
+
+KATEGORI: Şarj Grubu
+URUN: Şarj 45W PD TYPE-C
+ACIKLAMA: 17 serisi
+OZELLIKLERI:
+- 45W hızlı şarj gücü
+- Power Delivery (PD) destegi
+- Type-C giriş/çıkış uyumlu
+---------------------------------------------------
+
+KATEGORI: Şarj Grubu
+URUN: Şarj PD iOS RH03
+ACIKLAMA: Power Delivery destekli iOS uyumlu hızlı şarj adaptörü ve kablo seti.
+OZELLIKLERI:
+- Power Delivery (PD) destegi
+- iOS (Lightning) uyumlu
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Şarj Grubu
+URUN: Şarj 67W Type-C RH572
+ACIKLAMA: 67W Type-C uyumlu hızlı şarj adaptörü ve kablo seti.
+OZELLIKLERI:
+- 67W hızlı şarj gücü
+- Type-C giriş/çıkış uyumlu
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Şarj Grubu
+URUN: Şarj 18W iOS RH573
+ACIKLAMA: 18W iOS uyumlu hızlı şarj adaptörü ve kablo seti.
+OZELLIKLERI:
+- 18W hızlı şarj gücü
+- iOS (Lightning) uyumlu
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Şarj Grubu
+URUN: Şarj 18W Type-C RH574
+ACIKLAMA: 18W Type-C uyumlu hızlı şarj adaptörü ve kablo seti.
+OZELLIKLERI:
+- 18W hızlı şarj gücü
+- Type-C giriş/çıkış uyumlu
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Kulaklık Grubu
+URUN: Kulaklık ARB704
+ACIKLAMA: 3.5mm jak bağlantılı kablolu kulaklık.
+OZELLIKLERI:
+- Kaliteli ve dayanıklı yapı
+- Günlük kullanıma uygun tasarım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Kulaklık Grubu
+URUN: Kulaklık ARB712
+ACIKLAMA: 3.5mm jak bağlantılı kablolu kulaklık.
+OZELLIKLERI:
+- Kaliteli ve dayanıklı yapı
+- Günlük kullanıma uygun tasarım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Kulaklık Grubu
+URUN: Kulaklık ARB713
+ACIKLAMA: 3.5mm jak bağlantılı kablolu kulaklık.
+OZELLIKLERI:
+- Kaliteli ve dayanıklı yapı
+- Günlük kullanıma uygun tasarım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Kulaklık Grubu
+URUN: Kulaklık Type-C C10
+ACIKLAMA: Type-C bağlantılı kablolu kulaklık.
+OZELLIKLERI:
+- Type-C giriş/çıkış uyumlu
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Kulaklık Grubu
+URUN: Kulaklık Type-C C22
+ACIKLAMA: Type-C bağlantılı kablolu kulaklık.
+OZELLIKLERI:
+- Type-C giriş/çıkış uyumlu
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Kulaklık Grubu
+URUN: Kulaklık Type-C C23
+ACIKLAMA: Type-C bağlantılı kablolu kulaklık.
+OZELLIKLERI:
+- Type-C giriş/çıkış uyumlu
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Kulaklık Grubu
+URUN: Kulaklık K103
+ACIKLAMA: 3.5mm jak bağlantılı kablolu kulaklık.
+OZELLIKLERI:
+- Kaliteli ve dayanıklı yapı
+- Günlük kullanıma uygun tasarım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Kulaklık Grubu
+URUN: Kulaklık Type-C TC21
+ACIKLAMA: Type-C bağlantılı kablolu kulaklık.
+OZELLIKLERI:
+- Type-C giriş/çıkış uyumlu
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Kulaklık Grubu
+URUN: Kulaklık Type-C TPC01
+ACIKLAMA: Type-C bağlantılı kablolu kulaklık.
+OZELLIKLERI:
+- Type-C giriş/çıkış uyumlu
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Aksesuar
+URUN: OTG Dönüştürücü Lightning ARB507
+ACIKLAMA: USB to Lightning metal OTG dönüştürücü.
+OZELLIKLERI:
+- iOS (Lightning) uyumlu
+- Plug & Play OTG bağlantı
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Aksesuar
+URUN: Telefon Kartlığı (MagSafe)
+ACIKLAMA: MagSafe uyumlu deri telefon kartlığı, çok renk seçenekli.
+OZELLIKLERI:
+- Kaliteli ve dayanıklı yapı
+- Günlük kullanıma uygun tasarım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Aksesuar
+URUN: PC Kapak (Şeffaf)
+ACIKLAMA: MagSafe uyumlu şeffaf sert PC telefon kılıfı, iPhone/Samsung/Xiaomi modelleri için.
+OZELLIKLERI:
+- Telefonu darbelere karşı korur
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Aksesuar
+URUN: New Summer Kapak (Kelebek Desenli)
+ACIKLAMA: Taşlı kelebek desenli darbe emici telefon kılıfı, iPhone ve Samsung modelleri için.
+OZELLIKLERI:
+- Telefonu darbelere karşı korur
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Aksesuar
+URUN: Telefon Soğutucu Fan CX07
+ACIKLAMA: RGB ışıklı, mandallı telefon soğutucu fan (klips tip).
+OZELLIKLERI:
+- Oyun sırasında telefonu soğutur
+- RGB/ayarlanabilir ışık modları
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Aksesuar
+URUN: Telefon Soğutucu Fan DLA8
+ACIKLAMA: RGB ışıklı, mandallı telefon soğutucu fan (klips tip).
+OZELLIKLERI:
+- Oyun sırasında telefonu soğutur
+- RGB/ayarlanabilir ışık modları
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Aksesuar
+URUN: Bluetooth Yaka Mikrofonu F11
+ACIKLAMA: Kablosuz, Type-C ve Lightning uyumlu çiftli yaka mikrofonu.
+OZELLIKLERI:
+- Type-C giriş/çıkış uyumlu
+- iOS (Lightning) uyumlu
+- Kablosuz Bluetooth bağlantı
+---------------------------------------------------
+
+KATEGORI: Aksesuar
+URUN: Formag Telefon Kılıfı
+ACIKLAMA: MagSafe uyumlu, iç tarafı kadife, darbe emici silikon telefon kılıfı.
+OZELLIKLERI:
+- Telefonu darbelere karşı korur
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Aksesuar
+URUN: 2in1 Type-C Ses/Şarj Adaptör HB-12
+ACIKLAMA: Type-C girişli, aynı anda şarj ve 3.5mm kulaklık kullanımı sağlayan 2in1 adaptör.
+OZELLIKLERI:
+- Type-C giriş/çıkış uyumlu
+- 2'si 1 arada kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Aksesuar
+URUN: 2in1 Type-C Ses/Şarj Adaptör HB-13 (Metal)
+ACIKLAMA: Type-C girişli, metal gövdeli, aynı anda şarj ve 3.5mm kulaklık kullanımı sağlayan 2in1 adaptör.
+OZELLIKLERI:
+- Type-C giriş/çıkış uyumlu
+- 2'si 1 arada kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Aksesuar
+URUN: RGB Halka Işık MJ-171
+ACIKLAMA: Müzik ritmine duyarlı RGB dolgu ışığı (ring light), telefon tutuculu.
+OZELLIKLERI:
+- Araç içinde güvenli ve sağlam tutuş
+- RGB/ayarlanabilir ışık modları
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Aksesuar
+URUN: RGB Halka Işık MJ-261
+ACIKLAMA: Müzik ritmine duyarlı RGB dolgu ışığı (ring light), telefon tutuculu.
+OZELLIKLERI:
+- Araç içinde güvenli ve sağlam tutuş
+- RGB/ayarlanabilir ışık modları
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Aksesuar
+URUN: RGB Halka Işık MJ-321 (Çantalı)
+ACIKLAMA: Müzik ritmine duyarlı, uzaktan kumandalı RGB dolgu ışığı (ring light), taşıma çantalı.
+OZELLIKLERI:
+- RGB/ayarlanabilir ışık modları
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Aksesuar
+URUN: RGB Halka Işık MJ-451
+ACIKLAMA: Müzik ritmine duyarlı RGB dolgu ışığı (ring light), telefon tutuculu.
+OZELLIKLERI:
+- Araç içinde güvenli ve sağlam tutuş
+- RGB/ayarlanabilir ışık modları
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Aksesuar
+URUN: Telefon Kumaş Kayış/Kılıf (8 Renk)
+ACIKLAMA: Örgü kumaş dokulu, çok renk seçenekli taşınabilir telefon kayışı/kılıfı.
+OZELLIKLERI:
+- Telefonu darbelere karşı korur
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Aksesuar
+URUN: Dokunmatik Kalem (Heartz)
+ACIKLAMA: Tüm dokunmatik ekranlarla uyumlu stylus kalem.
+OZELLIKLERI:
+- Hassas dokunmatik kullanım
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Aksesuar
+URUN: MagSafe Cüzdan (Kart Tutucu)
+ACIKLAMA: MagSafe uyumlu deri kart tutucu cüzdan.
+OZELLIKLERI:
+- Araç içinde güvenli ve sağlam tutuş
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Aksesuar
+URUN: Type-C OTG Adaptör (4 Renk)
+ACIKLAMA: Type-C girişli, çoklu renk seçenekli OTG USB adaptör.
+OZELLIKLERI:
+- Type-C giriş/çıkış uyumlu
+- Plug & Play OTG bağlantı
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Aksesuar
+URUN: Ruhatech Plain Kapak
+ACIKLAMA: iPhone modelleri için MagSafe uyumlu, kadife içi, çeşitli renklerde silikon kılıf.
+OZELLIKLERI:
+- Telefonu darbelere karşı korur
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Stand Ve Tripod
+URUN: Metal stand STD02
+ACIKLAMA: Metal telefon standı.
+OZELLIKLERI:
+- Ayarlanabilir açı ve yükseklik
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Cam Grubu
+URUN: Cam 550CC Hayalet
+ACIKLAMA: 550CC güçlendirilmiş, gizlilik korumalı (hayalet) 9H sertlikte ekran koruyucu cam.
+OZELLIKLERI:
+- 9H sertlik, çizilmeye dayanıklı
+- Kolay ve hizalı uygulama
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Cam Grubu
+URUN: Cam Anti-Static
+ACIKLAMA: 3D temperli, anti-statik özellikli ekran koruyucu cam.
+OZELLIKLERI:
+- 9H sertlik, çizilmeye dayanıklı
+- Kolay ve hizalı uygulama
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Cam Grubu
+URUN: Cam
+ACIKLAMA: 0.25mm eski tip temperli ekran koruyucu cam.
+OZELLIKLERI:
+- 9H sertlik, çizilmeye dayanıklı
+- Kolay ve hizalı uygulama
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Cam Grubu
+URUN: Cam Edge Unipro
+ACIKLAMA: Kavisli ekranlara uygun edge temperli ekran koruyucu cam.
+OZELLIKLERI:
+- 9H sertlik, çizilmeye dayanıklı
+- Kolay ve hizalı uygulama
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Cam Grubu
+URUN: Cam Magic Box
+ACIKLAMA: Saniyeler içinde balonsuz uygulama sağlayan kutulu ekran koruyucu cam.
+OZELLIKLERI:
+- 9H sertlik, çizilmeye dayanıklı
+- Kolay ve hizalı uygulama
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Cam Grubu
+URUN: Cam Magic Box Hayalet
+ACIKLAMA: Saniyeler içinde balonsuz uygulama sağlayan, gizlilik korumalı kutulu hayalet ekran koruyucu cam.
+OZELLIKLERI:
+- 9H sertlik, çizilmeye dayanıklı
+- Kolay ve hizalı uygulama
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Cam Grubu
+URUN: Vela Glass Makinalı Cam Uygulama Seti
+ACIKLAMA: Tek tıkla hizalama sağlayan, balonsuz makinalı ekran koruyucu cam uygulama seti.
+OZELLIKLERI:
+- 9H sertlik, çizilmeye dayanıklı
+- Kolay ve hizalı uygulama
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Nostalji Radyo
+URUN: Nostalji Radyo CM1900
+ACIKLAMA: Nostaljik görünümlü, kablosuz Bluetooth radyo hoparlör.
+OZELLIKLERI:
+- Kablosuz Bluetooth bağlantı
+- Nostaljik/retro tasarım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Nostalji Radyo
+URUN: Nostalji Radyo HS123
+ACIKLAMA: Nostaljik görünümlü, kablosuz Bluetooth radyo hoparlör.
+OZELLIKLERI:
+- Kablosuz Bluetooth bağlantı
+- Nostaljik/retro tasarım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Nostalji Radyo
+URUN: Nostalji Radyo HS124
+ACIKLAMA: Nostaljik görünümlü, kablosuz Bluetooth radyo hoparlör.
+OZELLIKLERI:
+- Kablosuz Bluetooth bağlantı
+- Nostaljik/retro tasarım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Nostalji Radyo
+URUN: Nostalji Radyo HS1962
+ACIKLAMA: Nostaljik görünümlü, kablosuz Bluetooth radyo hoparlör.
+OZELLIKLERI:
+- Kablosuz Bluetooth bağlantı
+- Nostaljik/retro tasarım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Nostalji Radyo
+URUN: Nostalji Radyo MD1217
+ACIKLAMA: Nostaljik görünümlü, kablosuz Bluetooth radyo hoparlör.
+OZELLIKLERI:
+- Kablosuz Bluetooth bağlantı
+- Nostaljik/retro tasarım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Nostalji Radyo
+URUN: Nostalji Radyo RT710
+ACIKLAMA: Nostaljik görünümlü, kablosuz Bluetooth radyo hoparlör.
+OZELLIKLERI:
+- Kablosuz Bluetooth bağlantı
+- Nostaljik/retro tasarım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Power Bank
+URUN: Power Bank 10000mAh DP-24
+ACIKLAMA: 4 entegre kablolu (Lightning/Type-C/Micro), ekranlı 10000mAh power bank.
+OZELLIKLERI:
+- 10000mAh yüksek kapasite
+- Type-C giriş/çıkış uyumlu
+- Micro USB uyumlu
+---------------------------------------------------
+
+KATEGORI: Power Bank
+URUN: Power Bank 20000mAh 30W H004
+ACIKLAMA: PD 30W hızlı şarj, 3 entegre kablolu (Lightning/Type-C/Micro) 20000mAh power bank.
+OZELLIKLERI:
+- 30W hızlı şarj gücü
+- Power Delivery (PD) destegi
+- 20000mAh yüksek kapasite
+---------------------------------------------------
+
+KATEGORI: Power Bank
+URUN: Power Bank 10000mAh 22.5W H12
+ACIKLAMA: 22.5W PD 20W, iki taşıma askılı, ekranlı 10000mAh power bank.
+OZELLIKLERI:
+- 5W hızlı şarj gücü
+- Power Delivery (PD) destegi
+- 10000mAh yüksek kapasite
+---------------------------------------------------
+
+KATEGORI: Power Bank
+URUN: Power Bank 10000mAh 22.5W H2
+ACIKLAMA: 22.5W PD 20W, taşıma askılı 10000mAh power bank.
+OZELLIKLERI:
+- 5W hızlı şarj gücü
+- Power Delivery (PD) destegi
+- 10000mAh yüksek kapasite
+---------------------------------------------------
+
+KATEGORI: Power Bank
+URUN: Power Bank 10000mAh 22.5W H21
+ACIKLAMA: 22.5W PD 20W, taşıma askılı, ekranlı 10000mAh power bank.
+OZELLIKLERI:
+- 5W hızlı şarj gücü
+- Power Delivery (PD) destegi
+- 10000mAh yüksek kapasite
+---------------------------------------------------
+
+KATEGORI: Power Bank
+URUN: Power Bank 20000mAh 22.5W H31
+ACIKLAMA: 22.5W PD 20W hızlı şarj destekli, ekranlı 20000mAh taşınabilir şarj cihazı.
+OZELLIKLERI:
+- 5W hızlı şarj gücü
+- Power Delivery (PD) destegi
+- 20000mAh yüksek kapasite
+---------------------------------------------------
+
+KATEGORI: Power Bank
+URUN: Power Bank 10000mAh 22.5W H32
+ACIKLAMA: 22.5W PD 20W hızlı şarj destekli, ekranlı 10000mAh taşınabilir şarj cihazı.
+OZELLIKLERI:
+- 5W hızlı şarj gücü
+- Power Delivery (PD) destegi
+- 10000mAh yüksek kapasite
+---------------------------------------------------
+
+KATEGORI: Power Bank
+URUN: Power Bank 20000mAh 22.5W H9
+ACIKLAMA: 22.5W PD 20W hızlı şarj destekli 20000mAh power bank.
+OZELLIKLERI:
+- 5W hızlı şarj gücü
+- Power Delivery (PD) destegi
+- 20000mAh yüksek kapasite
+---------------------------------------------------
+
+KATEGORI: Gimbal
+URUN: Gılbal smart x
+ACIKLAMA: Gımbal
+OZELLIKLERI:
+- 3 eksenli stabilizasyon
+- Titreşimsiz, akıcı video çekimi
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Akıllı Saat
+URUN: Akıllı Saat DLX-S-014
+ACIKLAMA: Yuvarlak kadranlı, örgü kordonlu akıllı saat.
+OZELLIKLERI:
+- Bildirim ve sağlık takibi
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------
+
+KATEGORI: Akıllı Saat
+URUN: AKILLI SAAT
+ACIKLAMA: AMOLED EKRAN
+OZELLIKLERI:
+- Bildirim ve sağlık takibi
+- Kolay kullanım
+- Dayanıklı yapı
+---------------------------------------------------

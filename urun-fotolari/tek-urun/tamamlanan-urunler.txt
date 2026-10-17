@@ -1,0 +1,83 @@
+RUHATECH - TAMAMLANAN URUNLER LISTESI
+=====================================================
+Bu listede, urun-fotolari/tamamlandi klasorune tasinmis olan ve
+islemi (icerik/paylasim) tamamlanmis urunler yer alir. Kontrol icin
+kullanabilirsiniz.
+
+1. TUR (ilk tasinan urunler)
+---------------------------------------------------
+KATEGORI                 URUN                                  KOD
+Speaker                  Speaker ZQS1440                       ZQS1440
+Arac Aksesuar             Arac Aku Takviye A7711                 A7711
+BT Kulaklik Grubu         AirPods Pro2 ANC                       AIRPODS-PRO2-ANC
+Kablo Grubu               Kablo Type-C 5A ARB011                  ARB011
+Sarj Basligi              Sarj Basligi 25W Cift Cikis ARB-CH03    ARB-CH03
+Bilgisayar Aksesuar       Kablosuz Mouse ARB-M01                  ARB-M01
+Sarj Grubu                Sarj 18W iOS ARB013                     ARB013-18W-IOS
+Kulaklik Grubu            Kulaklik iOS ARB200                     ARB200
+Aksesuar                  OTG Donusturucu Type-C ARB503           ARB503
+Stand Ve Tripod           Metal Stand ARB608                      ARB608
+Cam Grubu                 Cam 550CC Full                          CAM-550CC-FULL
+Nostalji Radyo            Nostalji Radyo CM101                    CM101
+Guvenlik Kamerasi         Dis Mekan Guvenlik Kamerasi DLX-CMR01    DELUXSE-CMR01
+Power Bank                Power Bank 10000mAh DP-20                DELUXSE-DP20
+Gimbal                    Smart Gimbal X2                          DELUXSE-GIMBAL-X2
+Akilli Saat               Akilli Saat DLX-S-011                    DELUXSE-S011
+Ev Aletleri               Dijital Alarmli Saat GH8032               HEARTZ-GH8032
+
+2. TUR (ikinci tasinan urunler)
+---------------------------------------------------
+KATEGORI                 URUN                                  KOD
+Speaker                  Speaker ZQS8151                        ZQS8151
+Arac Aksesuar             Arac Supurge AHV41                     AHV41
+BT Kulaklik Grubu         BT Kulaklik BT18                       BT18
+Kablo Grubu               Kablo iOS 5A ARB012                    ARB012
+Sarj Basligi              Sarj Basligi 25W PD ARB017              ARB017
+Bilgisayar Aksesuar       Kablosuz Mouse ARB-M02                 ARB-M02
+Sarj Grubu                Sarj 45W Cift Cikis ARB016              ARB016-45W-DUAL
+Kulaklik Grubu            Kulaklik Type-C ARB701                  ARB701
+Aksesuar                  MagSafe Metal Halka (5'li Set)          MAGSAFE-RING5
+Stand Ve Tripod           Isikli Tripod BLV30                    BLV30
+Cam Grubu                 Cam Hayalet                             CAM-HAYALET
+Nostalji Radyo            Nostalji Radyo RT719                    RT719
+Guvenlik Kamerasi         Ic Mekan Guvenlik Kamerasi DLX-CMR02    DELUXSE-CMR02
+Power Bank                Power Bank 20000mAh 66W H005            HEARTZ-H005
+Gimbal                    Gimbal JH06                             HEARTZ-GIMBAL-JH06
+Akilli Saat               Akilli Saat DLX-S-012                   DELUXSE-S012
+Ev Aletleri               Boyun Masaj Aleti PGM204                 HEARTZ-PGM204
+
+3. TUR (ucuncu tasinan urunler)
+---------------------------------------------------
+KATEGORI                 URUN                                  KOD
+Arac Aksesuar             Arac Tutucu K007                        K007
+BT Kulaklik Grubu         BT Kulaklik H10                         H10
+Kablo Grubu               Kablo Type-C 6A ARB305                  ARB305
+Sarj Basligi              Sarj Basligi 45W GAN DS45                DS45
+Bilgisayar Aksesuar       Kablosuz Mouse PMW75                    DELUXSE-PMW75
+Sarj Grubu                Sarj 45W PD Type-C Set ARB-CH02          ARBCH02
+Kulaklik Grubu            Kablolu Kulaklik Type-C (Heartz)         HEARTZ-EARPHONE-GENERIC
+Aksesuar                  Telefon Sogutucu Fan CX06                HEARTZ-CX06
+Stand Ve Tripod           Metal Stand ve Tutucu RT777              RT777
+Cam Grubu                 Cam Edge Full Model                     CAM-EDGE-FULL
+Nostalji Radyo            Nostalji Radyo HS1700                   HS1700
+Power Bank                Power Bank 20000mAh 22.5W H23            HEARTZ-H23
+Gimbal                    Smart Gimbal XE                         DELUXSE-GIMBAL-XE
+Akilli Saat               Akilli Saat DLX-S-13                    DELUXSE-S013
+Ev Aletleri               USB Nemlendirici NML-01                  NML01
+
+4. TUR (kalan TUM urunler - kategori siniri yok)
+---------------------------------------------------
+135 urun tek seferde eklendi. Detayli liste ve aciklamalar icin:
+urun-fotolari/tek-urun/urun-aciklamalari.txt dosyasina bakiniz.
+Bu turden sonra fotografi olan HICBIR urun kalmamistir - katalogdaki
+tum fotografli urunler ya tamamlandi ya da su an tek-urun'de islem
+bekliyor.
+
+Dosya konumu: urun-fotolari/tamamlandi/
+=====================================================
+
+DIKKAT: Asagidaki kategorilerde artik fotografli urun kalmadi,
+yeni tur eklemesi yapilamaz:
+- Speaker (12 urunden sadece ZQS1440 ve ZQS8151'in fotografi vardi, ikisi de kullanildi)
+- Guvenlik Kamerasi (toplam 2 urun vardi, ikisi de kullanildi)
+- Ev Aletleri (toplam 3 urun vardi, ucu de kullanildi: GH8032, PGM204, NML01)

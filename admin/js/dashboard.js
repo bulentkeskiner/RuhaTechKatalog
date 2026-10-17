@@ -12,6 +12,7 @@ import {
   uploadImageToGithub, uploadVideoToGithub,
 } from './github-publish.js';
 import { subscribeTags, addTag, deleteTag, renameTag, seedTagsFromProducts } from './tags-store.js';
+import { initPriceList, setPriceListProducts, showPriceList } from './pricelist.js';
 
 // ---------------------------------------------------------------------------
 // Auth guard
@@ -65,6 +66,9 @@ function handleRoute() {
     openProductForm(null);
   } else if (hash === '#/products') {
     showView('productsView');
+  } else if (hash.startsWith('#/pricelist')) {
+    showView('priceListView');
+    showPriceList(hash === '#/pricelist/onizleme' ? 2 : 1);
   } else if (hash === '#/tags') {
     showView('tagsView');
   } else if (hash === '#/settings') {
@@ -75,6 +79,8 @@ function handleRoute() {
   }
 }
 window.addEventListener('hashchange', handleRoute);
+
+initPriceList();
 
 // ---------------------------------------------------------------------------
 // State
@@ -92,6 +98,7 @@ function boot() {
   loadGithubSettings();
   subscribeProducts((items) => {
     products = items;
+    setPriceListProducts(items);
     populateFilterOptions();
     renderTable();
     renderStats();

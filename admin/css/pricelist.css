@@ -1,0 +1,488 @@
+/* ==========================================================================
+   Fiyat Listesi — panel arayüzü + PDF şablonları
+   Şablon CSS'i html2canvas ile görüntüye çevrildiği için yalnızca onun
+   desteklediği özellikler kullanılır: düz renk / linear-gradient, border,
+   border-radius, box-shadow. text-transform, line-clamp, color-mix, filter
+   gibi şeyler bilerek kullanılmıyor (büyük harf dönüşümü JS'te, tr-TR ile).
+   ========================================================================== */
+
+/* ---------- Adım sekmeleri ---------- */
+.pl-steps {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  margin-bottom: 16px;
+  max-width: 100%;
+}
+.pl-step {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  border: none; background: none; font: inherit; font-size: 13.5px; font-weight: 600;
+  color: var(--muted); padding: 8px 16px; border-radius: 999px; cursor: pointer; white-space: nowrap;
+}
+.pl-step .num {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--border); color: var(--text);
+  font-size: 11px; display: inline-flex; align-items: center; justify-content: center;
+}
+.pl-step:hover { color: var(--text); }
+.pl-step.active { background: var(--surface); color: var(--text); box-shadow: var(--shadow); }
+.pl-step.active .num { background: var(--accent); color: var(--accent-text); }
+.pl-step:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.pl-step-count { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: var(--accent); }
+.pl-step-count:empty { display: none; }
+
+.pl-label {
+  font-size: 11.5px; font-weight: 600; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 8px;
+}
+
+/* ---------- Adım 1: ürün seçimi ---------- */
+.pl-search { position: relative; display: block; margin-bottom: 12px; }
+.pl-search svg { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+.pl-search input {
+  width: 100%; font: inherit; font-size: 15px;
+  padding: 11px 14px 11px 40px;
+  border-radius: var(--radius-md); border: 1px solid var(--border);
+  background: var(--surface); color: var(--text);
+}
+.pl-search input:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+
+.pl-chip-n {
+  display: inline-block; margin-left: 7px; min-width: 18px; padding: 1px 6px;
+  border-radius: 999px; background: var(--accent); color: var(--accent-text);
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600; text-align: center;
+}
+.group-chip.active .pl-chip-n { background: var(--accent-text); color: var(--accent); }
+.pl-chip-selected { border-style: dashed; }
+
+.pl-bulk { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+.pl-bulk .count-chip { margin-left: auto; }
+
+.pl-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 8px; }
+.pl-item {
+  display: flex; align-items: center; gap: 12px;
+  min-height: 70px; padding: 10px 12px;
+  font: inherit; color: inherit; text-align: left;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md);
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+  transition: border-color 0.12s, background 0.12s;
+}
+.pl-item:hover { border-color: var(--muted); }
+.pl-item:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.pl-item[aria-pressed='true'] { border-color: var(--accent); background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
+.pl-item-thumb {
+  width: 50px; height: 50px; flex-shrink: 0; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  background: #fff; border: 1px solid var(--border); border-radius: 8px;
+}
+.pl-item-thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.pl-item-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.pl-item-title {
+  font-size: 14px; font-weight: 500; line-height: 1.3;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.pl-item-meta { font-size: 12px; color: var(--muted); font-family: 'IBM Plex Mono', monospace; }
+.pl-item-meta .bad { color: var(--bad); font-family: 'IBM Plex Sans', sans-serif; }
+.pl-item-meta .warn { color: var(--warn); font-family: 'IBM Plex Sans', sans-serif; }
+.pl-check {
+  width: 26px; height: 26px; flex-shrink: 0; border-radius: 50%;
+  border: 1.5px solid var(--border); color: transparent;
+  display: flex; align-items: center; justify-content: center;
+}
+.pl-item[aria-pressed='true'] .pl-check { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
+
+/* ---------- Alt sabit eylem çubuğu ---------- */
+.pl-actionbar {
+  position: sticky; bottom: 0; z-index: 15;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  margin-top: 18px; padding: 12px 4px;
+  background: var(--bg); border-top: 1px solid var(--border);
+}
+.pl-actionbar .btn-primary { min-width: 150px; }
+.pl-actionbar-info { font-size: 14px; color: var(--muted); display: flex; align-items: center; flex-wrap: wrap; gap: 4px; }
+.pl-actionbar-info strong { color: var(--text); font-family: 'IBM Plex Mono', monospace; font-size: 15px; }
+.pl-linkbtn {
+  background: none; border: none; color: var(--accent); cursor: pointer;
+  font: inherit; font-size: 13px; font-weight: 600; padding: 6px 8px;
+}
+.pl-linkbtn:hover { text-decoration: underline; }
+
+/* ---------- Adım 2: şablon + seçenekler + önizleme ---------- */
+.pl-design { display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 24px; align-items: start; }
+.pl-options { position: sticky; top: 16px; }
+
+.pl-templates { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; }
+.pl-tpl {
+  display: flex; flex-direction: column; gap: 6px;
+  padding: 8px 8px 10px; font: inherit; color: inherit; text-align: left;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md);
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.pl-tpl:hover { border-color: var(--muted); }
+.pl-tpl:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.pl-tpl[aria-pressed='true'] { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+.pl-tpl-name { font-size: 13.5px; font-weight: 600; padding: 0 2px; display: flex; align-items: center; gap: 6px; }
+.pl-tpl[aria-pressed='true'] .pl-tpl-name::after {
+  content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); margin-left: auto;
+}
+.pl-tpl-desc { font-size: 11.5px; color: var(--muted); line-height: 1.35; padding: 0 2px; }
+
+/* Şablon küçük resimleri (yalnızca arayüz) */
+.pl-mock {
+  display: flex; flex-direction: column; gap: 4px;
+  aspect-ratio: 4 / 3; overflow: hidden; padding-bottom: 6px;
+  border-radius: 6px; border: 1px solid rgba(0, 0, 0, 0.08);
+}
+.pl-mock span, .pl-mock i, .pl-mock b, .pl-mock s { display: block; text-decoration: none; }
+.pl-mock .m-hero { position: relative; flex: 0 0 30%; }
+.pl-mock .m-hero b { position: absolute; left: 9%; bottom: 34%; width: 48%; height: 13%; border-radius: 2px; }
+.pl-mock .m-hero s { position: absolute; left: 9%; bottom: 13%; width: 17%; height: 10%; border-radius: 2px; }
+.pl-mock .m-cat { height: 7px; margin: 2px 6px 0; border-radius: 3px; flex-shrink: 0; }
+.pl-mock .m-grid { display: grid; gap: 3px; margin: 0 6px; flex: 1; }
+.pl-mock .m-grid i { border-radius: 3px; min-height: 6px; }
+
+.mock-gece { background: #eef1f6; }
+.mock-gece .m-hero { background: linear-gradient(125deg, #0a1328, #1f427a); }
+.mock-gece .m-hero b { background: #fff; }
+.mock-gece .m-hero s { background: #ffc53d; }
+.mock-gece .m-cat { background: #2446d8; }
+.mock-gece .m-cat ~ .m-cat { background: #ee6a1c; }
+.mock-gece .m-grid { grid-template-columns: repeat(4, 1fr); }
+.mock-gece .m-grid i { background: #fff; border: 1px solid #dde3ee; }
+
+.mock-sade { background: #fff; }
+.mock-sade .m-hero { margin: 0 7px; border-bottom: 2px solid #121212; }
+.mock-sade .m-hero b { left: 0; background: #121212; }
+.mock-sade .m-hero s { left: 0; border: 1px solid #121212; border-radius: 99px; }
+.mock-sade .m-cat { height: 4px; width: 34%; background: #121212; margin-left: 7px; }
+.mock-sade .m-grid { grid-template-columns: repeat(4, 1fr); margin: 0 7px; }
+.mock-sade .m-grid i { background: #fff; border: 1px solid #e3e3e3; }
+
+.mock-liste { background: #fff; }
+.mock-liste .m-hero { flex-basis: 24%; background: #0f3b33; }
+.mock-liste .m-hero b { background: #fff; bottom: 30%; width: 40%; }
+.mock-liste .m-hero s { background: #7ee0c3; left: auto; right: 9%; bottom: 32%; }
+.mock-liste .m-cat { background: #f0f5f3; border-left: 3px solid #0e7c66; border-radius: 0 2px 2px 0; }
+.mock-liste .m-grid { grid-template-columns: 1fr 1fr; column-gap: 6px; row-gap: 2px; }
+.mock-liste .m-grid i { background: #f3f6f5; border-left: 6px solid #d3ddd9; border-radius: 1px; }
+
+.mock-vitrin { background: #f5efe6; }
+.mock-vitrin .m-hero b { background: #2b1d14; height: 16%; }
+.mock-vitrin .m-hero s { background: #b4532a; border-radius: 99px; }
+.mock-vitrin .m-cat { height: 5px; width: 32%; background: #2b1d14; margin-left: 7px; }
+.mock-vitrin .m-grid { grid-template-columns: repeat(3, 1fr); gap: 4px; margin: 0 7px; }
+.mock-vitrin .m-grid i { background: #fff; border: 1px solid #ece2d4; border-radius: 4px; }
+
+/* Seçenekler paneli */
+.pl-opt-panel { padding: 2px 14px; margin-bottom: 14px; }
+.pl-switch {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  min-height: 50px; padding: 8px 0; border-bottom: 1px solid var(--border);
+  font-size: 14px; font-weight: 500; cursor: pointer;
+}
+.pl-switch input[type='checkbox'] {
+  -webkit-appearance: none; appearance: none; margin: 0; flex-shrink: 0; cursor: pointer;
+  position: relative; width: 44px; height: 26px; border-radius: 999px;
+  background: var(--border); transition: background 0.15s;
+}
+.pl-switch input[type='checkbox']::after {
+  content: ''; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%;
+  background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25); transition: transform 0.15s;
+}
+.pl-switch input[type='checkbox']:checked { background: var(--accent); }
+.pl-switch input[type='checkbox']:checked::after { transform: translateX(18px); }
+.pl-switch input:focus-visible, .pl-switch select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.pl-switch select {
+  font: inherit; font-size: 13.5px; padding: 7px 10px; max-width: 58%;
+  border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--bg); color: var(--text);
+}
+.pl-texts summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  min-height: 50px; font-size: 14px; font-weight: 500; cursor: pointer; list-style: none;
+}
+.pl-texts summary::-webkit-details-marker { display: none; }
+.pl-texts summary svg { color: var(--muted); transition: transform 0.15s; }
+.pl-texts[open] summary svg { transform: rotate(180deg); }
+.pl-texts-body { padding: 2px 0 12px; }
+
+/* Önizleme */
+.pl-preview-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.pl-preview {
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+  min-height: 240px; padding: 16px;
+  background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius-md);
+}
+.pl-sheet {
+  position: relative; flex-shrink: 0; overflow: hidden; background: #fff; border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 12px 28px -14px rgba(0, 0, 0, 0.45);
+}
+.pl-sheet > .pl-page { position: absolute; top: 0; left: 0; transform-origin: top left; }
+.pl-preview-status { margin: auto; padding: 40px 12px; text-align: center; color: var(--muted); font-size: 14px; }
+.pl-preview-status .btn { margin-top: 14px; }
+
+/* PDF oluşturma penceresi */
+.pl-modal { align-items: center; }
+.pl-modal .modal { max-width: 380px; }
+.pl-modal .modal-body { text-align: center; padding: 26px 22px 22px; }
+.pl-modal-title { font-size: 17px; font-weight: 600; }
+.pl-modal-sub { font-size: 13.5px; color: var(--muted); margin-top: 6px; }
+.pl-progress { height: 8px; margin: 18px 0 4px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }
+.pl-progress-bar { height: 100%; width: 0; background: var(--accent); border-radius: 999px; transition: width 0.25s ease; }
+.pl-done-icon {
+  width: 52px; height: 52px; margin: 0 auto 12px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--accent-soft); color: var(--accent);
+}
+.pl-modal-actions { display: flex; flex-direction: column; gap: 8px; margin-top: 20px; }
+.pl-modal-actions .btn { padding: 12px 16px; }
+.pl-btn-ghost { border-color: transparent; background: transparent; color: var(--muted); }
+
+/* Ölçüm / yakalama alanı: sayfalar ekran dışında gerçek boyutta dizilir. */
+.pl-offscreen { position: absolute; left: -12000px; top: 0; width: 794px; pointer-events: none; }
+
+@media (max-width: 1100px) {
+  .pl-design { grid-template-columns: 1fr; }
+  .pl-options { position: static; }
+}
+@media (max-width: 860px) {
+  .pl-steps { display: flex; width: 100%; }
+  .pl-step { flex: 1; padding: 9px 8px; }
+  .pl-search input { font-size: 16px; }
+  .pl-list { grid-template-columns: 1fr; }
+  .pl-actionbar { margin-left: -14px; margin-right: -14px; padding: 10px 14px; }
+  .pl-actionbar .btn { padding: 12px 16px; }
+  .pl-actionbar .btn-primary { min-width: 0; flex: 1; max-width: 220px; }
+  .pl-switch select { font-size: 16px; }
+  .pl-mock { aspect-ratio: 16 / 10; }
+  .pl-preview { padding: 10px; gap: 10px; margin-left: -4px; margin-right: -4px; }
+}
+
+/* ==========================================================================
+   PDF sayfası — ortak iskelet (A4 = 794 × 1123 CSS px)
+   ========================================================================== */
+.pl-page {
+  width: 794px; height: 1123px; overflow: hidden; position: relative;
+  display: flex; flex-direction: column;
+  background: #fff; color: #111; line-height: 1.3; text-align: left;
+  -webkit-font-smoothing: antialiased;
+}
+.pl-page *, .pl-page *::before, .pl-page *::after { box-sizing: border-box; }
+.pl-page h1 { margin: 0; font-size: inherit; }
+.pl-hero, .pl-minihead, .pl-foot { flex-shrink: 0; }
+.pl-body { flex: 1 1 auto; min-height: 0; overflow: hidden; display: flex; flex-direction: column; gap: 12px; }
+.pl-body > * { flex-shrink: 0; }
+.pl-hero-top, .pl-brand, .pl-meta { display: flex; align-items: center; }
+.pl-hero-top { justify-content: space-between; gap: 16px; }
+.pl-mark { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; font-weight: 800; }
+.pl-pageno:empty { display: none; }
+
+.pl-cat { display: flex; align-items: center; gap: 10px; }
+.pl-cat-count { margin-left: auto; white-space: nowrap; }
+
+.pl-row { display: grid; grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr)); gap: 12px; }
+.pl-card { position: relative; display: flex; flex-direction: column; min-width: 0; overflow: hidden; }
+.pl-card-img {
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  background: #fff; overflow: hidden;
+}
+.pl-card-img img { display: block; flex: 0 0 auto; min-width: 0; min-height: 0; max-width: 100%; max-height: 100%; width: auto; height: auto; }
+.pl-noimg { position: relative; width: 46px; height: 36px; border: 2px solid #d6dbe3; border-radius: 7px; }
+.pl-noimg::before {
+  content: ''; position: absolute; left: 8px; top: 7px; width: 8px; height: 8px; border-radius: 50%; background: #d6dbe3;
+}
+.pl-noimg::after {
+  content: ''; position: absolute; left: 6px; right: 6px; bottom: 6px; height: 6px; border-radius: 2px; background: #e4e8ee;
+}
+.pl-card-info { min-width: 0; }
+.pl-code { white-space: nowrap; overflow: hidden; }
+.pl-card-title { overflow: hidden; word-break: break-word; }
+.pl-price { display: flex; align-items: baseline; gap: 2px; white-space: nowrap; }
+.pl-price-ask { font-size: 12px; font-weight: 700; letter-spacing: 0.2px; }
+
+/* ==========================================================================
+   Şablon 1 — Gece
+   ========================================================================== */
+.plt-gece { background: #eef1f6; color: #14203a; font-family: 'Plus Jakarta Sans', 'IBM Plex Sans', Arial, sans-serif; }
+.plt-gece .pl-hero {
+  position: relative; overflow: hidden; height: 232px; padding: 28px 36px 32px;
+  display: flex; flex-direction: column;
+  background-color: #0b1630; background-image: linear-gradient(125deg, #0a1328 0%, #12264b 55%, #1f427a 100%);
+  color: #fff;
+}
+.plt-gece .pl-hero::before {
+  content: ''; position: absolute; right: -90px; top: -130px; width: 360px; height: 360px; border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+}
+.plt-gece .pl-hero::after {
+  content: ''; position: absolute; right: 90px; bottom: -170px; width: 280px; height: 280px; border-radius: 50%;
+  background: rgba(90, 170, 255, 0.09);
+}
+.plt-gece .pl-hero-top, .plt-gece .pl-hero-main { position: relative; z-index: 1; }
+.plt-gece .pl-brand { gap: 10px; font-size: 17px; font-weight: 800; letter-spacing: -0.2px; }
+.plt-gece .pl-mark { width: 30px; height: 30px; border-radius: 9px; background: #fff; color: #0b1630; font-size: 11px; letter-spacing: 0.5px; }
+.plt-gece .pl-meta { gap: 12px; font-size: 11px; font-weight: 700; letter-spacing: 1.6px; color: rgba(255, 255, 255, 0.72); }
+.plt-gece .pl-pageno { padding: 5px 11px 4px; border-radius: 999px; background: rgba(255, 255, 255, 0.13); color: #fff; letter-spacing: 1px; }
+.plt-gece .pl-hero-main { margin-top: auto; }
+.plt-gece .pl-title { font-size: 56px; font-weight: 800; letter-spacing: -1px; line-height: 1; }
+.plt-gece .pl-hero-sub { display: flex; align-items: center; gap: 14px; margin-top: 18px; }
+.plt-gece .pl-badge { padding: 6px 12px 5px; border-radius: 7px; background: #ffc53d; color: #0b1630; font-size: 12px; font-weight: 800; letter-spacing: 2px; }
+.plt-gece .pl-subtitle { font-size: 11px; font-weight: 600; letter-spacing: 2.2px; color: rgba(255, 255, 255, 0.72); }
+.plt-gece .pl-minihead {
+  height: 62px; padding: 0 28px; display: flex; align-items: center; gap: 14px;
+  background-color: #0b1630; background-image: linear-gradient(125deg, #0a1328, #1a3766); color: #fff;
+}
+.plt-gece .pl-minihead-title { margin-left: auto; font-size: 11px; font-weight: 700; letter-spacing: 2px; color: rgba(255, 255, 255, 0.75); }
+.plt-gece .pl-body { padding: 20px 26px 16px; }
+.plt-gece .pl-cat {
+  height: 46px; padding: 0 18px; border-radius: 12px; color: #fff;
+  background-color: var(--cat); background-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0.22) 100%);
+}
+.plt-gece .pl-cat:not(:first-child) { margin-top: 8px; }
+.plt-gece .pl-cat-index { display: none; }
+.plt-gece .pl-cat-name { font-size: 16px; font-weight: 800; letter-spacing: 1.6px; }
+.plt-gece .pl-cat-cont { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: rgba(255, 255, 255, 0.78); }
+.plt-gece .pl-cat-count { padding: 5px 10px 4px; border-radius: 999px; background: rgba(255, 255, 255, 0.2); font-size: 10px; font-weight: 800; letter-spacing: 1.5px; }
+.plt-gece .pl-card { height: 220px; background: #fff; border: 1px solid #e0e5ee; border-radius: 14px; box-shadow: 0 1px 2px rgba(16, 32, 64, 0.05); }
+.plt-gece .pl-card-img { height: 128px; padding: 13px 12px 6px; border-bottom: 1px solid #eef1f6; }
+.plt-gece .pl-code {
+  position: absolute; top: 9px; left: 9px; z-index: 1; max-width: calc(100% - 18px);
+  padding: 4px 7px 3px; border-radius: 6px; background: var(--cat); color: #fff;
+  font-size: 9.5px; font-weight: 800; letter-spacing: 0.6px;
+}
+.plt-gece .pl-card-info { padding: 9px 12px 0; }
+.plt-gece .pl-card-title { height: 31px; font-size: 12px; font-weight: 700; line-height: 1.3; color: #16213a; }
+.plt-gece .pl-price { margin-top: auto; padding: 0 12px 10px; color: var(--cat); }
+.plt-gece .pl-price-num { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; }
+.plt-gece .pl-price-cur { font-size: 14px; font-weight: 800; }
+.plt-gece .pl-price-ask { font-size: 13px; font-weight: 800; padding-bottom: 4px; }
+.plt-gece .pl-foot {
+  height: 44px; display: flex; align-items: center; justify-content: center; gap: 12px;
+  background: #0b1630; color: #fff; font-size: 11px; font-weight: 800; letter-spacing: 2px;
+}
+.plt-gece .pl-foot-dot { width: 5px; height: 5px; border-radius: 50%; background: #ffc53d; }
+.plt-gece .pl-foot-contact { color: rgba(255, 255, 255, 0.78); font-weight: 600; }
+.plt-gece .pl-foot .pl-pageno { display: none; }
+
+/* ==========================================================================
+   Şablon 2 — Sade
+   ========================================================================== */
+.plt-sade { background: #fff; color: #121212; font-family: 'DM Sans', 'IBM Plex Sans', Arial, sans-serif; }
+.plt-sade .pl-hero { padding: 44px 48px 0; }
+.plt-sade .pl-brand { gap: 9px; font-size: 14px; font-weight: 700; }
+.plt-sade .pl-mark { width: 26px; height: 26px; border-radius: 7px; background: #121212; color: #fff; font-size: 10px; letter-spacing: 0.4px; }
+.plt-sade .pl-meta { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8a8a8a; }
+.plt-sade .pl-hero .pl-pageno, .plt-sade .pl-minihead .pl-pageno { display: none; }
+.plt-sade .pl-hero-main { padding: 48px 0 24px; border-bottom: 2px solid #121212; }
+.plt-sade .pl-title { font-size: 58px; font-weight: 700; letter-spacing: -2px; line-height: 1; }
+.plt-sade .pl-hero-sub { display: flex; align-items: center; gap: 12px; margin-top: 18px; }
+.plt-sade .pl-badge { padding: 4px 11px 3px; border: 1.5px solid #121212; border-radius: 999px; font-size: 10.5px; font-weight: 700; letter-spacing: 1.6px; }
+.plt-sade .pl-subtitle { font-size: 13px; color: #6f6f6f; }
+.plt-sade .pl-minihead { margin: 0 48px; padding: 34px 0 14px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #121212; }
+.plt-sade .pl-minihead-title { margin-left: auto; font-size: 12px; color: #6f6f6f; }
+.plt-sade .pl-body { padding: 24px 48px 16px; gap: 16px; }
+.plt-sade .pl-cat { align-items: baseline; gap: 12px; padding-bottom: 9px; border-bottom: 1px solid #dcdcdc; }
+.plt-sade .pl-cat:not(:first-child) { margin-top: 10px; }
+.plt-sade .pl-cat-index { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #a3a3a3; }
+.plt-sade .pl-cat-name { font-size: 19px; font-weight: 700; letter-spacing: -0.4px; }
+.plt-sade .pl-cat-cont { font-size: 12px; color: #9a9a9a; }
+.plt-sade .pl-cat-count { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8a8a8a; }
+.plt-sade .pl-row { gap: 16px; }
+.plt-sade .pl-card { height: 214px; }
+.plt-sade .pl-card-img { height: 134px; padding: 11px; border: 1px solid #ebebeb; border-radius: 10px; }
+.plt-sade .pl-card-info { padding-top: 10px; }
+.plt-sade .pl-code { margin-bottom: 3px; font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; color: #969696; letter-spacing: 0.3px; }
+.plt-sade .pl-card-title { height: 31px; font-size: 12px; font-weight: 500; line-height: 1.3; color: #222; }
+.plt-sade .pl-price { margin-top: auto; flex-direction: row-reverse; justify-content: flex-end; gap: 1px; font-family: 'IBM Plex Mono', monospace; color: #121212; }
+.plt-sade .pl-price-num { font-size: 16px; font-weight: 600; }
+.plt-sade .pl-price-cur { font-size: 14px; font-weight: 600; }
+.plt-sade .pl-price-ask { font-family: 'DM Sans', Arial, sans-serif; font-size: 12.5px; font-weight: 700; }
+.plt-sade .pl-foot { margin: 0 48px; height: 56px; display: flex; align-items: center; gap: 10px; border-top: 1px solid #dcdcdc; font-size: 11px; color: #6f6f6f; }
+.plt-sade .pl-foot-brand { font-weight: 700; color: #121212; }
+.plt-sade .pl-foot-dot { width: 3px; height: 3px; border-radius: 50%; background: #b5b5b5; }
+.plt-sade .pl-foot .pl-pageno { margin-left: auto; font-family: 'IBM Plex Mono', monospace; color: #121212; }
+
+/* ==========================================================================
+   Şablon 3 — Liste (kompakt)
+   ========================================================================== */
+.plt-liste { background: #fff; color: #14231f; font-family: 'IBM Plex Sans', Arial, sans-serif; }
+.plt-liste .pl-hero {
+  height: 152px; padding: 26px 32px 24px; display: flex; flex-direction: column; justify-content: space-between;
+  background: #0f3b33; color: #fff;
+}
+.plt-liste .pl-brand { gap: 9px; font-size: 14px; font-weight: 700; }
+.plt-liste .pl-mark { width: 26px; height: 26px; border-radius: 6px; background: #7ee0c3; color: #0f3b33; font-size: 10px; letter-spacing: 0.4px; }
+.plt-liste .pl-meta { gap: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: rgba(255, 255, 255, 0.72); }
+.plt-liste .pl-hero .pl-pageno, .plt-liste .pl-minihead .pl-pageno { display: none; }
+.plt-liste .pl-hero-main { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; }
+.plt-liste .pl-title { font-size: 36px; font-weight: 700; letter-spacing: -0.8px; line-height: 1; }
+.plt-liste .pl-hero-sub { display: flex; flex-direction: column; align-items: flex-end; gap: 7px; }
+.plt-liste .pl-badge { padding: 4px 10px 3px; border-radius: 4px; background: #7ee0c3; color: #0f3b33; font-size: 10.5px; font-weight: 700; letter-spacing: 1.6px; }
+.plt-liste .pl-subtitle { font-size: 11.5px; color: rgba(255, 255, 255, 0.75); }
+.plt-liste .pl-minihead { height: 50px; padding: 0 32px; display: flex; align-items: center; gap: 12px; background: #0f3b33; color: #fff; }
+.plt-liste .pl-minihead-title { margin-left: auto; font-size: 11.5px; color: rgba(255, 255, 255, 0.75); }
+.plt-liste .pl-body { padding: 18px 32px 12px; gap: 0; }
+.plt-liste .pl-cat { margin-bottom: 2px; padding: 8px 12px; border-left: 4px solid var(--cat); border-radius: 0 4px 4px 0; background: #f0f5f3; }
+.plt-liste .pl-cat:not(:first-child) { margin-top: 16px; }
+.plt-liste .pl-cat-index { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #7d8d86; }
+.plt-liste .pl-cat-name { font-size: 12px; font-weight: 700; letter-spacing: 1.3px; }
+.plt-liste .pl-cat-cont { font-size: 9.5px; font-weight: 600; letter-spacing: 1px; color: #7d8d86; }
+.plt-liste .pl-cat-count { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #5c6b65; }
+.plt-liste .pl-row { column-gap: 28px; row-gap: 0; }
+.plt-liste .pl-card { flex-direction: row; align-items: center; gap: 12px; min-height: 62px; padding: 7px 0; border-bottom: 1px solid #e6ebe8; }
+.plt-liste .pl-card-img { width: 46px; height: 46px; padding: 3px; border: 1px solid #e3e8e5; border-radius: 6px; }
+.plt-liste .pl-noimg { width: 26px; height: 21px; border-width: 1.5px; border-radius: 4px; }
+.plt-liste .pl-noimg::before { left: 4px; top: 3px; width: 5px; height: 5px; }
+.plt-liste .pl-noimg::after { left: 3px; right: 3px; bottom: 3px; height: 3px; }
+.plt-liste .pl-card-info { flex: 1; }
+.plt-liste .pl-code { margin-bottom: 2px; font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; color: #6b7a74; letter-spacing: 0.3px; }
+.plt-liste .pl-card-title { max-height: 30px; font-size: 11.5px; font-weight: 500; line-height: 1.3; }
+.plt-liste .pl-price { flex-shrink: 0; font-family: 'IBM Plex Mono', monospace; color: #0f3b33; }
+.plt-liste .pl-price-num { font-size: 14px; font-weight: 600; }
+.plt-liste .pl-price-cur { font-size: 11px; font-weight: 600; }
+.plt-liste .pl-price-ask { font-family: 'IBM Plex Sans', Arial, sans-serif; font-size: 11px; font-weight: 600; color: #5c6b65; }
+.plt-liste .pl-foot { margin: 0 32px; height: 42px; display: flex; align-items: center; gap: 10px; border-top: 1px solid #dfe5e2; font-size: 10.5px; color: #5c6b65; }
+.plt-liste .pl-foot-brand { font-weight: 700; color: #0f3b33; }
+.plt-liste .pl-foot-dot { width: 3px; height: 3px; border-radius: 50%; background: #9fb0a9; }
+.plt-liste .pl-foot .pl-pageno { margin-left: auto; font-family: 'IBM Plex Mono', monospace; color: #0f3b33; }
+
+/* ==========================================================================
+   Şablon 4 — Vitrin
+   ========================================================================== */
+.plt-vitrin { background: #f5efe6; color: #2b1d14; font-family: 'DM Sans', 'IBM Plex Sans', Arial, sans-serif; }
+.plt-vitrin .pl-hero { padding: 44px 44px 26px; }
+.plt-vitrin .pl-brand { gap: 10px; font-size: 11.5px; font-weight: 700; letter-spacing: 3px; }
+.plt-vitrin .pl-mark { width: 28px; height: 28px; border-radius: 50%; background: #2b1d14; color: #f5efe6; font-size: 9.5px; letter-spacing: 0.5px; }
+.plt-vitrin .pl-meta { font-size: 11.5px; color: #8c7462; }
+.plt-vitrin .pl-hero .pl-pageno, .plt-vitrin .pl-minihead .pl-pageno { display: none; }
+.plt-vitrin .pl-hero-main { margin-top: 42px; }
+.plt-vitrin .pl-title { font-family: 'Fraunces', Georgia, serif; font-size: 62px; font-weight: 600; letter-spacing: -1.5px; line-height: 1; }
+.plt-vitrin .pl-hero-sub { display: flex; align-items: center; gap: 14px; margin-top: 20px; }
+.plt-vitrin .pl-badge { padding: 5px 12px 4px; border-radius: 999px; background: #b4532a; color: #fff; font-size: 10.5px; font-weight: 700; letter-spacing: 1.8px; }
+.plt-vitrin .pl-subtitle { font-size: 13px; color: #7a6455; }
+.plt-vitrin .pl-minihead { margin: 0 44px; padding: 30px 0 12px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #e3d7c6; }
+.plt-vitrin .pl-minihead-title { margin-left: auto; font-family: 'Fraunces', Georgia, serif; font-size: 16px; font-weight: 600; }
+.plt-vitrin .pl-body { padding: 20px 44px 14px; gap: 16px; }
+.plt-vitrin .pl-cat { align-items: baseline; gap: 10px; }
+.plt-vitrin .pl-cat::before { content: ''; flex-shrink: 0; align-self: center; width: 8px; height: 8px; border-radius: 50%; background: #b4532a; }
+.plt-vitrin .pl-cat:not(:first-child) { margin-top: 10px; }
+.plt-vitrin .pl-cat-index { display: none; }
+.plt-vitrin .pl-cat-name { font-family: 'Fraunces', Georgia, serif; font-size: 24px; font-weight: 600; letter-spacing: -0.4px; }
+.plt-vitrin .pl-cat-cont { font-size: 12px; color: #9a8270; }
+.plt-vitrin .pl-cat-count { font-size: 12px; color: #9a8270; }
+.plt-vitrin .pl-row { gap: 16px; }
+.plt-vitrin .pl-card { height: 282px; padding: 10px; background: #fff; border: 1px solid #ece2d4; border-radius: 18px; box-shadow: 0 1px 2px rgba(60, 40, 20, 0.05); }
+.plt-vitrin .pl-card-img { height: 178px; padding: 8px; border-radius: 12px; }
+.plt-vitrin .pl-card-info { padding: 10px 6px 0; }
+.plt-vitrin .pl-code { margin-bottom: 3px; font-size: 10px; font-weight: 500; color: #a58f7d; letter-spacing: 0.8px; }
+.plt-vitrin .pl-card-title { height: 34px; font-size: 13px; font-weight: 500; line-height: 1.3; }
+.plt-vitrin .pl-price { margin-top: auto; padding: 0 6px 4px; font-family: 'Fraunces', Georgia, serif; color: #b4532a; }
+.plt-vitrin .pl-price-num { font-size: 24px; font-weight: 600; letter-spacing: -0.3px; }
+.plt-vitrin .pl-price-cur { font-size: 15px; font-weight: 600; }
+.plt-vitrin .pl-price-ask { font-family: 'DM Sans', Arial, sans-serif; font-size: 13px; font-weight: 700; padding-bottom: 5px; }
+.plt-vitrin .pl-foot { margin: 0 44px; height: 54px; display: flex; align-items: center; gap: 10px; border-top: 1px solid #e3d7c6; font-size: 11.5px; color: #7a6455; }
+.plt-vitrin .pl-foot-brand { font-family: 'Fraunces', Georgia, serif; font-size: 14px; font-weight: 600; color: #2b1d14; }
+.plt-vitrin .pl-foot-dot { width: 4px; height: 4px; border-radius: 50%; background: #b4532a; }
+.plt-vitrin .pl-foot .pl-pageno { margin-left: auto; color: #2b1d14; }

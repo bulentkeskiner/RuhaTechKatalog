@@ -21,6 +21,7 @@ const NO_CATEGORY = 'Diğer';
 const SELECTED_FILTER = '__selected__';
 const ROUTE_LIST = '#/pricelist';
 const ROUTE_PREVIEW = '#/pricelist/onizleme';
+const LOGO_URL = 'img/ruhatech-logo.png';
 
 const LIB_URLS = [
   'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js',
@@ -35,16 +36,6 @@ const TEMPLATES = [
     id: 'gece', name: 'Gece', desc: 'Koyu başlık, renkli kategori bantları', cols: 4, mockCells: 8,
     caps: { title: true, badge: true, subtitle: true, cat: true, count: true, foot: true },
     fonts: ['800 16px "Plus Jakarta Sans"', '700 16px "Plus Jakarta Sans"', '600 16px "Plus Jakarta Sans"'],
-  },
-  {
-    id: 'sade', name: 'Sade', desc: 'Beyaz zemin, ince çizgiler, bol boşluk', cols: 4, mockCells: 8,
-    caps: { badge: true },
-    fonts: ['700 16px "DM Sans"', '500 16px "DM Sans"', '400 16px "DM Sans"', '600 16px "IBM Plex Mono"'],
-  },
-  {
-    id: 'liste', name: 'Liste', desc: 'Kompakt; sayfa başına en çok ürün', cols: 2, mockCells: 8,
-    caps: { badge: true, cat: true, count: false },
-    fonts: ['700 16px "IBM Plex Sans"', '500 16px "IBM Plex Sans"', '400 16px "IBM Plex Sans"', '600 16px "IBM Plex Mono"'],
   },
   {
     id: 'vitrin', name: 'Vitrin', desc: 'Sıcak tonlar, büyük ürün görselleri', cols: 3, mockCells: 6,
@@ -64,6 +55,8 @@ const DEFAULT_OPTIONS = {
   groupByCategory: true,
   showCode: true,
   sort: 'title',
+  catOrderMode: 'alpha',   // 'alpha' | 'custom'
+  catOrder: [],            // özel sıralamada kategori adları, sırasıyla
   title: 'Fiyat Listesi',
   badge: 'Toptan',
   subtitle: 'Adet fiyatı · Amerikan Doları (USD)',
@@ -88,6 +81,9 @@ let previewDirty = true;
 let renderSeq = 0;
 let generating = false;
 let pdfResult = null;       // { file, name, url }
+let logoOk = false;         // logo dosyası yüklenebildi mi (yüklenemezse "RT" rozeti kullanılır)
+let catDrag = null;         // kategori sürükleme durumu
+let catOrderKey = '';       // kategori listesinin son çizilen içeriği
 
 const $ = (id) => document.getElementById(id);
 const up = (s) => String(s ?? '').toLocaleUpperCase('tr-TR');
@@ -102,6 +98,7 @@ function loadState() {
     // Bozuk/erişilemeyen kayıt: varsayılanlarla devam.
   }
   if (!TEMPLATES.some((t) => t.id === options.template)) options.template = DEFAULT_OPTIONS.template;
+  if (!Array.isArray(options.catOrder)) options.catOrder = [];
 }
 
 function saveState() {
@@ -130,6 +127,30 @@ function catCompare(a, b) {
   return a.localeCompare(b, 'tr');
 }
 function isViewActive() { return $('priceListView')?.classList.contains('active'); }
+
+/** Kategori adlarını seçili sıralamaya göre dizer (özelde listede olmayanlar sona, A–Z). */
+function sortCategories(names) {
+  if (options.catOrderMode !== 'custom') return names.sort(catCompare);
+  const pos = new Map(options.catOrder.map((n, i) => [n, i]));
+  return names.sort((a, b) => {
+    const ia = pos.has(a) ? pos.get(a) : Infinity;
+    const ib = pos.has(b) ? pos.get(b) : Infinity;
+    return ia === ib ? catCompare(a, b) : ia - ib;
+  });
+}
+
+let logoPromise = null;
+function loadLogo() {
+  if (!logoPromise) {
+    logoPromise = new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve(true);
+      img.onerror = () => resolve(false);
+      img.src = LOGO_URL;
+    });
+  }
+  return logoPromise;
+}
 
 function initials(name) {
   const caps = name.match(/\p{Lu}/gu) || [];
@@ -274,7 +295,7 @@ function renderTemplatePicker() {
     return `
     <button type="button" class="pl-tpl" data-tpl="${t.id}" aria-pressed="${t.id === options.template}">
       <span class="pl-mock mock-${t.id}" aria-hidden="true">
-        <span class="m-hero"><b></b><s></s></span>
+        <span class="m-hero"><u></u><b></b><s></s></span>
         <span class="m-cat"></span><span class="m-grid">${cells}</span>
         <span class="m-cat"></span><span class="m-grid">${cells}</span>
       </span>
@@ -288,6 +309,7 @@ function fillOptionsForm() {
   $('plGroup').checked = options.groupByCategory;
   $('plShowCode').checked = options.showCode;
   $('plSort').value = options.sort;
+  $('plCatOrderMode').value = options.catOrderMode;
   for (const k of TEXT_KEYS) $('plText_' + k).value = options[k];
   $('plTemplates').querySelectorAll('.pl-tpl').forEach((b) => b.setAttribute('aria-pressed', b.dataset.tpl === options.template));
 }
@@ -317,7 +339,112 @@ function groupItems(items) {
     if (!map.has(c)) map.set(c, []);
     map.get(c).push(p);
   }
-  return [...map.keys()].sort(catCompare).map((name) => ({ name, items: map.get(name) }));
+  return sortCategories([...map.keys()]).map((name) => ({ name, items: map.get(name) }));
+}
+
+// ---- Kategori sırası (özel sıralama listesi) --------------------------------
+function catOrderNames() {
+  return [...$('plCatOrderList').querySelectorAll('.pl-co-item')].map((el) => el.dataset.cat);
+}
+
+function renderCatOrder() {
+  const grouped = options.groupByCategory;
+  $('plCatOrderRow').hidden = !grouped;
+  const box = $('plCatOrder');
+  box.hidden = !grouped || options.catOrderMode !== 'custom';
+  if (box.hidden || catDrag) return;
+
+  const counts = new Map();
+  for (const p of products) {
+    if (!selected.has(p.id)) continue;
+    const c = categoryOf(p);
+    counts.set(c, (counts.get(c) || 0) + 1);
+  }
+  const names = sortCategories([...counts.keys()]);
+  // İçerik aynıysa yeniden çizme: ok tuşlarındaki odak kaybolmasın.
+  const key = names.map((n) => `${n}:${counts.get(n)}`).join('|');
+  if (key === catOrderKey) return;
+  catOrderKey = key;
+  const last = names.length - 1;
+  $('plCatOrderList').innerHTML = names.length ? names.map((name, i) => `
+    <li class="pl-co-item" data-cat="${escapeHtml(name)}">
+      <span class="pl-co-handle" title="Sürükleyerek taşıyın" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="6" r="1.6"/><circle cx="15" cy="6" r="1.6"/><circle cx="9" cy="12" r="1.6"/><circle cx="15" cy="12" r="1.6"/><circle cx="9" cy="18" r="1.6"/><circle cx="15" cy="18" r="1.6"/></svg>
+      </span>
+      <span class="pl-co-num">${i + 1}</span>
+      <span class="pl-co-name">${escapeHtml(name)}</span>
+      <span class="pl-co-count">${counts.get(name)}</span>
+      <button type="button" class="pl-co-btn" data-move="-1" aria-label="${escapeHtml(name)} yukarı taşı"${i === 0 ? ' disabled' : ''}>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m6 15 6-6 6 6"/></svg>
+      </button>
+      <button type="button" class="pl-co-btn" data-move="1" aria-label="${escapeHtml(name)} aşağı taşı"${i === last ? ' disabled' : ''}>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+    </li>`).join('') : '<li class="pl-co-empty">Seçili ürün yok.</li>';
+}
+
+/** Ekrandaki sırayı kaydeder; şu an seçili olmayan kategorilerin önceki sırası korunur. */
+function commitCatOrder(names) {
+  setOption('catOrder', [...names, ...options.catOrder.filter((n) => !names.includes(n))]);
+}
+
+function wireCatOrder() {
+  const list = $('plCatOrderList');
+
+  list.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-move]');
+    if (!btn || btn.disabled) return;
+    const cat = btn.closest('.pl-co-item').dataset.cat;
+    const names = catOrderNames();
+    const i = names.indexOf(cat);
+    const j = i + Number(btn.dataset.move);
+    if (j < 0 || j >= names.length) return;
+    [names[i], names[j]] = [names[j], names[i]];
+    commitCatOrder(names);
+    renderCatOrder();
+    const moved = [...list.querySelectorAll('.pl-co-item')].find((el) => el.dataset.cat === cat);
+    const again = moved?.querySelector(`[data-move="${btn.dataset.move}"]`);
+    (again && !again.disabled ? again : moved?.querySelector('.pl-co-btn:not([disabled])'))?.focus();
+  });
+
+  // Tutamaktan sürükle-bırak (fare ve dokunmatik). İşaretçi listeye bağlanır;
+  // satır DOM'da taşınırken yakalama kaybolmasın.
+  list.addEventListener('pointerdown', (e) => {
+    const handle = e.target.closest('.pl-co-handle');
+    if (!handle || (e.pointerType === 'mouse' && e.button !== 0)) return;
+    e.preventDefault();
+    const item = handle.closest('.pl-co-item');
+    catDrag = { item, pointerId: e.pointerId };
+    item.classList.add('dragging');
+    list.setPointerCapture(e.pointerId);
+  });
+  list.addEventListener('pointermove', (e) => {
+    if (!catDrag || e.pointerId !== catDrag.pointerId) return;
+    const y = e.clientY;
+    const before = [...list.children].find((el) => {
+      if (el === catDrag.item) return false;
+      const r = el.getBoundingClientRect();
+      return y < r.top + r.height / 2;
+    });
+    if (before) {
+      if (catDrag.item.nextElementSibling !== before) list.insertBefore(catDrag.item, before);
+    } else if (list.lastElementChild !== catDrag.item) {
+      list.appendChild(catDrag.item);
+    }
+    list.querySelectorAll('.pl-co-num').forEach((n, i) => { n.textContent = i + 1; });
+    // Ekranın kenarına yaklaşınca sayfayı kaydır (alttaki sabit çubuğu hesaba kat).
+    if (y < 80) window.scrollBy(0, -14);
+    else if (y > window.innerHeight - 110) window.scrollBy(0, 14);
+  });
+  const endDrag = (e) => {
+    if (!catDrag || e.pointerId !== catDrag.pointerId) return;
+    catDrag.item.classList.remove('dragging');
+    catDrag = null;
+    commitCatOrder(catOrderNames());
+    renderCatOrder();
+  };
+  list.addEventListener('pointerup', endDrag);
+  list.addEventListener('pointercancel', endDrag);
 }
 
 // ---- Görsel önbelleği -------------------------------------------------------
@@ -417,19 +544,28 @@ function pageParts(tpl) {
   const wa = whatsappNumber();
   const date = new Date().toLocaleDateString('tr-TR');
 
-  const brandHTML = brand
-    ? `<span class="pl-brand"><span class="pl-mark">${escapeHtml(initials(brand))}</span><span>${t('brand', brand)}</span></span>`
+  // Logo varsa: ilk sayfada büyük logo, diğer sayfaların üst şeridinde ve her
+  // sayfanın alt bilgisinde küçük logo. Yoksa baş harflerden oluşan rozet.
+  const mark = logoOk
+    ? `<img class="pl-logo-sm" src="${LOGO_URL}" alt="">`
+    : (brand ? `<span class="pl-mark">${escapeHtml(initials(brand))}</span>` : '');
+  const brandHTML = mark || brand
+    ? `<span class="pl-brand">${mark}${brand ? `<span>${t('brand', brand)}</span>` : ''}</span>`
     : '<span class="pl-brand"></span>';
   const subHTML = badge || subtitle
     ? `<div class="pl-hero-sub">${badge ? `<span class="pl-badge">${t('badge', badge)}</span>` : ''}${subtitle ? `<span class="pl-subtitle">${t('subtitle', subtitle)}</span>` : ''}</div>`
     : '';
 
   const hero = `<header class="pl-hero">
-      <div class="pl-hero-top">${brandHTML}<span class="pl-meta"><span class="pl-date">${date}</span><span class="pl-pageno"></span></span></div>
-      <div class="pl-hero-main"><h1 class="pl-title">${t('title', title)}</h1>${subHTML}</div>
+      <div class="pl-hero-top">${logoOk ? '<span class="pl-brand"></span>' : brandHTML}<span class="pl-meta"><span class="pl-date">${date}</span><span class="pl-pageno"></span></span></div>
+      <div class="pl-hero-main">
+        ${logoOk ? `<img class="pl-logo" src="${LOGO_URL}" alt="${escapeHtml(brand)}">` : ''}
+        <div class="pl-hero-text"><h1 class="pl-title">${t('title', title)}</h1>${subHTML}</div>
+      </div>
     </header>`;
   const mini = `<header class="pl-minihead">${brandHTML}<span class="pl-minihead-title">${t('title', [title, badge].filter(Boolean).join(' · '))}</span><span class="pl-pageno"></span></header>`;
   const foot = `<footer class="pl-foot">
+      ${logoOk ? `<img class="pl-foot-logo" src="${LOGO_URL}" alt="">` : ''}
       ${brand ? `<span class="pl-foot-brand">${t('foot', brand)}</span>` : ''}
       ${brand && contact ? '<span class="pl-foot-dot"></span>' : ''}
       ${contact ? `<span class="pl-foot-contact"${wa ? ` data-href="https://wa.me/${wa}"` : ''}>${t('foot', contact)}</span>` : ''}
@@ -440,7 +576,7 @@ function pageParts(tpl) {
 
 function createPage(tpl, parts, first) {
   const page = document.createElement('div');
-  page.className = `pl-page plt-${tpl.id}`;
+  page.className = `pl-page plt-${tpl.id}${logoOk ? ' has-logo' : ''}`;
   page.innerHTML = (first ? parts.hero : parts.mini) + '<main class="pl-body"></main>' + parts.foot;
   return page;
 }
@@ -587,6 +723,7 @@ async function renderPreview() {
   if (currentStep !== 2 || !isViewActive()) { previewDirty = true; return; }
   const seq = ++renderSeq;
   previewDirty = false;
+  renderCatOrder();
   const items = selectedItems();
   const genBtn = $('plGenerate');
 
@@ -608,7 +745,7 @@ async function renderPreview() {
   }
 
   const tpl = getTemplate();
-  await loadFonts(tpl);
+  [logoOk] = await Promise.all([loadLogo(), loadFonts(tpl)]);
   if (seq !== renderSeq) return;
 
   pages = buildPages(items, tpl);
@@ -803,9 +940,17 @@ export function initPriceList() {
     $('plTemplates').querySelectorAll('.pl-tpl').forEach((b) => b.setAttribute('aria-pressed', b === btn));
     setOption('template', btn.dataset.tpl);
   });
-  $('plGroup').addEventListener('change', (e) => setOption('groupByCategory', e.target.checked));
+  $('plGroup').addEventListener('change', (e) => {
+    setOption('groupByCategory', e.target.checked);
+    renderCatOrder();
+  });
   $('plShowCode').addEventListener('change', (e) => setOption('showCode', e.target.checked));
   $('plSort').addEventListener('change', (e) => setOption('sort', e.target.value));
+  $('plCatOrderMode').addEventListener('change', (e) => {
+    setOption('catOrderMode', e.target.value);
+    renderCatOrder();
+  });
+  wireCatOrder();
   for (const k of TEXT_KEYS) {
     $('plText_' + k).addEventListener('input', (e) => setOption(k, e.target.value));
   }

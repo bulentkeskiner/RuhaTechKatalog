@@ -198,7 +198,17 @@
               <div class="panel pl-opt-panel">
                 <label class="pl-switch"><span>Kategorilere ayır</span><input type="checkbox" id="plGroup"></label>
                 <label class="pl-switch"><span>Ürün kodlarını göster</span><input type="checkbox" id="plShowCode"></label>
-                <label class="pl-switch"><span>Sıralama</span>
+                <label class="pl-switch" id="plCatOrderRow"><span>Kategori sırası</span>
+                  <select id="plCatOrderMode">
+                    <option value="alpha">Alfabetik (A–Z)</option>
+                    <option value="custom">Özel (elle sırala)</option>
+                  </select>
+                </label>
+                <div class="pl-catorder" id="plCatOrder" hidden>
+                  <div class="pl-catorder-hint">Tutamaktan sürükleyin ya da oklarla taşıyın.</div>
+                  <ol class="pl-co-list" id="plCatOrderList"></ol>
+                </div>
+                <label class="pl-switch"><span>Ürün sırası</span>
                   <select id="plSort">
                     <option value="title">Ürün adı (A–Z)</option>
                     <option value="priceAsc">Fiyat (artan)</option>
